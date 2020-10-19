@@ -97,6 +97,8 @@ public class MemberController {
     public String dispMyInfo2() {
         return "info/myinfo2";
     }
+    
+   
 
     // 어드민 페이지
     @GetMapping("/admin")

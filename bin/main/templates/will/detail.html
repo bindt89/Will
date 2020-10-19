@@ -15,7 +15,7 @@
             <p class="card-text" th:text="${post.content}"></p>
             <div th:if="${post.fileId != null}">
                 <strong>첨부파일 : </strong>
-                <a class="card-text" th:href="@{'/download/' + ${post.fileId}}" th:text="${filename}"></a>
+                <a class="card-text" th:href="@{'/download/' + ${post.fileId}}" th:text="${post.fileId}"></a>
             </div>
         </div>
     </div>
@@ -28,6 +28,8 @@
             <form id="delete-form" th:action="@{'/createwill/' + ${post.no}}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
                 <button id="delete-btn" type="submit" class="btn btn-danger">삭제</button>
+                
+               <footer th:insert="com/footer.html"></footer>
             </form>
         </div>
     </div>

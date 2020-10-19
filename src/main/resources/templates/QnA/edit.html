@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 - 글 수정</title>
+    <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+</head>
+<body>
+<header th:insert="com/header.html"></header>
+<div class="container">
+    <form th:action="@{'/write/edit/' + ${post.no}}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" name="no" th:value="${post.no}"/>
+         <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label"><strong>아이디</strong></label>
+            <div class="col-sm-4">
+                <input type="text" name="id" class="form-control" id="inputTitle" th:value="${post.id}" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
+            <div class="col-sm-10">
+                <input type="text" name="title" class="form-control" id="inputTitle" th:value="${post.title}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
+            <div class="col-sm-10">
+                <textarea type="text" name="content" class="form-control" id="inputContent"th:value="${post.content}"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <input class="btn btn-primary" type="submit" role="button" value="수정">
+            </div>
+        </div>
+        <footer th:insert="com/footer.html"></footer>
+    </form>
+</div>
+<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
