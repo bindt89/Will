@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+	<head>
+	
+		<title>Twenty by HTML5 UP</title>
+		<meta charset="utf-8" />
+		  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link  href="../static/css/main.css" rel="stylesheet"  th:href="@{/css/main.css}" />
+		<noscript><link rel="stylesheet" href="static/css/noscript.css"  th:href="@{/css/noscript.css}"/></noscript>
+	</head>
+	<body class="index is-preload">
+		<div id="page-wrapper">
+
+					<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a th:href="@{'/'}">Will</a></h1>
+					<nav id="nav">
+						<ul>
+							<li class="current"><a th:href="@{/}">Welcome</a></li>
+							<li class="submenu">
+								<a href="#">Layouts</a>
+								<ul>
+									<li><a th:href="@{/guidance}">절차안내</a></li>
+									<li><a href="right-sidebar.html">Right Sidebar</a></li>
+									<li><a href="no-sidebar.html">No Sidebar</a></li>
+									<li><a href="contact.html">Contact</a></li>
+								
+								</ul>
+							</li>
+							
+							
+							
+							<li class="submenu">
+								<a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+   								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/uesr/admin}">어드민</a>
+							</li>&nbsp;
+
+								
+										
+
+						  <li class="submenu">
+                        <a sec:authorize="isAuthenticated()" > <span sec:authentication="name"></span>님</a>
+                        
+                        <ul>
+                           
+                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">내 정보</a></li>
+                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">문서수정</a></li>
+                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/info}">Q&A</a></li>
+                        </ul>
+                     </li>
+			
+							
+							
+						<li><a sec:authorize="isAnonymous()"th:href="@{/user/login}"   class="button primary">Login</a></li>
+						<li><a sec:authorize="isAuthenticated()" th:href="@{/user/logout}" class="button primary">Logout</a></li>
+						</ul>
+					</nav>
+				</header>
+			
+				
+				
+	</div>
+	</body>
+	</html>
+				
+				
+				
+		
