@@ -34,6 +34,7 @@ public class MemberDto {
              .birthdate(birthdate)
              .gender(gender)
              .hp(hp)
+             .enabled(enabled)
              .addr(addr)
                 .build();
        return memberEntity;

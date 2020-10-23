@@ -2,10 +2,6 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-<link href="../static/css/writeday.css" rel="stylesheet" th:href="@{/css/writeday.css}" />
-<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 
 <title>개인정보  변경</title>
@@ -14,130 +10,81 @@
 
 </head>
 <body class="index is-preload">
-		<div id="page-wrapper">
 
-					<!-- Header -->
-				<header id="header">
-					<h1 id="logo"><a th:href="@{'/'}">Will</a></h1>
-					<nav id="nav">
-						<ul>
-							<li class="current"><a th:href="@{/}">Welcome</a></li>
-							<li class="submenu">
-								<a href="#">Layouts</a>
-								<ul>
-									<li><a sec:authorize="isAnonymous()" th:href="@{/guidance}">절차안내</a></li>
-									<li><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
-									<li><a href="contact.html">Contact</a></li>
-								
-								</ul>
-							</li>
-	
-							<li class="submenu">
-								<a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
-   								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/uesr/admin}">어드민</a>
-							</li>&nbsp;
+<div th:insert="com/header.html" ></div> <br><br>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
 
-								
-			
-		
-		
-			<li class="submenu">
-                        <a sec:authorize="isAuthenticated()" > <span sec:authentication="name"></span>님</a>
-                        
-                    
-                           <ul>
-                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">내 정보</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">진행 상황 보기</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/createwill}">문서작성</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/info}">Q&A</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/info}">전자 서명</a></li>
-                        </ul>   
-                       
-                        
-                  
-		
-							
-						<li><a sec:authorize="isAnonymous()"th:href="@{/user/login}"  class="button primary">Login</a></li>
-						<li><a sec:authorize="isAuthenticated()" th:href="@{/user/logout}" class="button primary">Logout</a></li>
-						</ul>
-						
-						
-
-
-
-
-	<form th:action="@{info/info2}" method="post">
-
-		<div id="tit">
-			<br> <b><font size="6" color="gold">회원가입 수정</font></b> <br>
-			<br>
-
-			<div class="buttons">
-				<a href="#" id="btn" type="button" class="btn-btn-primary"
-					role="button">작성자</a></span>&emsp; <a th:href="@{/user/signup3}" id="btn1"
-					type="button" class="btn-btn-primary" role="button">변호사/공증인</a></span>
-
-			</div>
-
-
-
-			<table>
+<form th:action="@{'/resignup/update/' + ${currentUser.no}}" method="post" class="login100-form validate-form">
+				<!-- <input type="hidden" name="_method" value="put"/> -->
+    			<input type="hidden" name="no" th:value="${currentUser.no}"/>
+    			<input type="hidden" id="password" name="password" th:value="${currentUser.password}" readonly/>
+				<input type="hidden" id="birthdate" name="birthdate" th:value="${currentUser.birthdate}" readonly/>
+    			<input type="hidden" id="gender" name="gender" th:value="${currentUser.gender}" readonly/>
+    			<input type="hidden" id="id" name="id" th:value="${currentUser.id}" readonly/>
+				<span class="login100-form-title p-b-25" >
+						Change Member Information
+				</span><br><br><br>
+				
 				<tr>
-
-				<tr>
-					<td id="mai">비밀번호</td>
+					<td  id="mai">이름</td><br>
+					<td colspan="2" align="left">&emsp;<input 
+						type="text" name="name" maxlength="20" th:value="${currentUser.name}" readonly>
+						 
+					</td>
+				</tr><br>
+				<!-- <tr>
+					<td id="mai">비밀번호</td><br>
 					<td colspan="1" align="left">&emsp;<input type="password"
 						name="password" maxlength="50" placeholder="비밀번호를  입력하세요">
 					</td>
-				</tr>
+				</tr><br>
 
-				<!-- <tr>
-					<td id="mai" >비밀번호 확인</td>
+				<tr>
+					<td id="mai" >비밀번호 확인</td><br>
 					<td colspan="1" align="left">&emsp;<input type="password" name="passwordcheck" maxlength="50" placeholder="동일하게 입력하세요">
 					</td>
-				</tr> -->
+				</tr><br> -->
 
 
 
 				<tr>
-					<td id="mai">이메일</td>
-					<td colspan="1" align="left">&emsp; <input type="text"
-						name="email" required="required" maxlength="50">
+					<td id="mai">이메일</td><br>
+					<td colspan="1" align="left">&emsp; <input class="input100" type="text" name="email" maxlength="50" th:value="${currentUser.email}" readonly>
+					<span class="focus-input100" ></span>
 					</td>
-				</tr>
+				</tr><br>
 		
 				<tr>
-					<td id="mai">핸드폰</td>
-					<td colspan="2" align="left">&emsp; <input type="text"
-						name="hp" required="required" maxlength="50">
+					<td id="mai">핸드폰</td><br>
+					<td colspan="2" align="left">&emsp; <input class="input100" type="text" name="hp" maxlength="15" th:value="${currentUser.hp}">
+					<span class="focus-input100"></span>
 					</td>
 
-				</tr>
+				</tr><br>
 
 				<tr>
 					&emsp;
-					<td id="mai">주소</td>
+					<td id="mai">주소</td><br>
 					<td><input type="text" size="70" name="addr"
-						required="required" class="from-cintol"></td>
-				</tr>
+						maxlength="15" th:value="${currentUser.addr}"></td>
+					<span class="focus-input100"></span>
+				</tr><br><br><br>
 
-
-
-
-			</table>
-			<br>
-			<br>
-			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="수정하기"> <input type="button" value="취소" th:onclick="loction.href='http://localhost:8886/'">
-				</td>
-			</tr>
-	</form>
-
-
-
-
+				<div class="container-login50-form-btn">
+					<button type="submit" class="login100-form-btn">
+						수정
+					</button><br>
+			
+				<br>
+				<div class="text-center">
+					<a th:href="@{/user/info}" class="txt2 hov1">
+						Cancel
+					</a>
+				</div>
+			</form>			
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
 
 </body>
 </html>

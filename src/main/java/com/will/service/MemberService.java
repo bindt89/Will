@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -15,8 +16,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.will.domain.MemberDetail;
 import com.will.domain.Role;
+import com.will.domain.entity.CertifiedEntity;
 import com.will.domain.entity.MemberEntity;
+import com.will.domain.repository.CertifiedRepository;
 import com.will.domain.repository.MemberRepository;
 import com.will.dto.MemberDto;
 
@@ -26,7 +30,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MemberService implements UserDetailsService {
    
-	private MemberRepository memberRepository;
+	  @Autowired
+		private MemberRepository memberRepository;
+	  private   CertifiedRepository certifiedRepository;
 
     @Transactional
     public Long joinUser(MemberDto memberDto) {
@@ -39,20 +45,36 @@ public class MemberService implements UserDetailsService {
     
     @Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        Optional<MemberEntity> userEntityWrapper = memberRepository.findById(id);
-        MemberEntity userEntity = userEntityWrapper.get();
 
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        if(("admin").equals(id)) {
-            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
-        } else {
-            authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
+    	MemberEntity memberEntity = memberRepository.findMemberEntityById(id);
+        if(memberEntity == null) {
+            throw  new UsernameNotFoundException("Could not find user with that email");
         }
-
-        return new User(userEntity.getId(), userEntity.getPassword(), authorities);
+        
+        return new MemberDetail(memberEntity);
+    	
+    	
+    	
+    	
+//        Optional<MemberEntity> userEntityWrapper = memberRepository.findById(id);
+//        MemberEntity userEntity = userEntityWrapper.get();
+//
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        if(("admin").equals(id)) {
+//            authorities.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+//        } else {
+//            authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
+//        }
+//
+//        return new User(userEntity.getId(), userEntity.getPassword(), authorities);
     }
 
+    
+    @Transactional
+    public Long savePost(MemberDto memberDto) {
+        return memberRepository.save(memberDto.toEntity()).getNo();
+    }
 
     @Transactional
     public List<MemberDto> getMemberlist() {
@@ -62,6 +84,7 @@ public class MemberService implements UserDetailsService {
         for (MemberEntity memberEntity : memberEntities) {
             MemberDto memberDto = MemberDto.builder()
                     .no(memberEntity.getNo())
+                    .id(memberEntity.getId())
                     .email(memberEntity.getEmail())
                     .name(memberEntity.getName())
                     .hp(memberEntity.getHp())
@@ -69,6 +92,7 @@ public class MemberService implements UserDetailsService {
                     .createdDate(memberEntity.getCreatedDate())
                     .build();
 
+            
             memberDtoList.add(memberDto);
         
         }
@@ -81,7 +105,8 @@ public class MemberService implements UserDetailsService {
         MemberEntity memberEntity = memberEntityWraper.get();
 
         MemberDto memberDto = MemberDto.builder()
-              .no(memberEntity.getNo())
+        		.no(memberEntity.getNo())
+                .id(memberEntity.getId())
                 .email(memberEntity.getEmail())
                 .name(memberEntity.getName())
                 .hp(memberEntity.getHp())
@@ -92,35 +117,48 @@ public class MemberService implements UserDetailsService {
         return memberDto;
     }
 
-//    //입력한 email과 name이 일치하는 값을 찾는 요청
-//   	public boolean userEmailCheck(String id, String name) {
-//
-//           MemberEntity memberEntity = memberRepository.findMemberEntityByEmail(id);
-//           if(memberEntity!=null && memberEntity.getName().equals(name)) {
-//               return true;
-//           }
-//           else {
-//               return false;
-//           }
-//       }
-//
-//       //해당 유저의 패스워드 변경
-//       public void updatePassword(String newpw, String email){
-//       	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//       	String password = passwordEncoder.encode(newpw);
-//           String id = memberRepository.findMemberEntityByEmail(email).getId();
-//           memberRepository.update(no, password);
-//       } 
-//       
-//       public String idCheck(String email) {
-//           System.out.println(memberRepository.findMemberEntityByEmail(email));
-//
-//           if (memberRepository.findMemberEntityByEmail(email) == null) {
-//               return "YES";
-//           } else {
-//               return "NO";
-//           }
-//
-//       }
+    //입력한 email과 name이 일치하는 값을 찾는 요청
+   	public boolean userEmailCheck(String id, String name) {
+
+           MemberEntity memberEntity = memberRepository.findMemberEntityByEmail(id);
+           if(memberEntity!=null && memberEntity.getName().equals(name)) {
+               return true;
+           }
+           else {
+               return false;
+           }
+       }
+
+    //해당 유저의 패스워드 변경
+    public void updatePassword(String newpw, String id){
+    	
+
+    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    	String password = passwordEncoder.encode(newpw);
+        Long no = memberRepository.findMemberEntityById(id).getNo();
+        memberRepository.update(no, password);
+    }
+    
+    //회원가입 email 중복확인
+    public String idCheck(String email) {
+        System.out.println(memberRepository.findMemberEntityByEmail(email));
+
+        if (memberRepository.findMemberEntityByEmail(email) == null) {
+            return "YES";
+        } else {
+            return "NO";
+        }
+    }
+    
+    //email로 발송 된 인증번호와 입력한 인증번호가 일치하는지 확인
+    public String CertifiedCheck(String number) {
+    	CertifiedEntity certifiedEntity = certifiedRepository.findCertifiedEntityByNumber(number);
+	        if(certifiedEntity!=null && certifiedEntity.getNumber().equals(number)) {
+	            return "YES";
+	        }
+	        else {
+	            return "NO";
+	        }
+    }
     
 }
