@@ -53,12 +53,15 @@ public class WillService {
                 .content(willEntity.getContent())
                 .fileId(willEntity.getFileId())
                 .createdDate(willEntity.getCreatedDate())
+                
                 .build();
         return WillDto;
     }
     @Transactional
     public void deleteWill(Long no) {
         WillRepository.deleteById(no);
+        
+        
     }
 
 }

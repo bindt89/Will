@@ -7,6 +7,7 @@ import com.will.dto.FileDto;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
+
 @Service
 public class FileService {
     private FileRepository fileRepository;
@@ -32,4 +33,9 @@ public class FileService {
                 .build();
         return fileDto;
     }
+    @Transactional
+    public void deleteFile(Long id) {
+        fileRepository.deleteById(id);
+}
+    
 }

@@ -7,6 +7,7 @@
 </head>
 <body>
 <header th:insert="com/header.html"></header>
+<br><br><br>
 <div class="container">
     <table class="table"><br><br>
         <thead class="thead-light">
@@ -18,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="text-center" th:each="post : ${QnAList}">
+        <tr class="text-center" th:each="post : ${QnAList}"[]>
             <th scope="row">
                 <span th:text="${post.no}"></span>
             </th>
