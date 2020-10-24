@@ -65,6 +65,8 @@ input::-moz-focus-inner {
 	padding: 0;
 }
 
+
+
 input, select, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;
@@ -73,6 +75,12 @@ input, select, textarea {
 }
 
 /* Basic */
+
+.col-auto mr-auto{
+	background-color: black;
+}
+
+
 
 	html {
 		box-sizing: border-box;
@@ -96,9 +104,15 @@ input, select, textarea {
 			-ms-transition: none !important;
 			transition: none !important;
 		}
+		
+	btn btn-primary {
+    	border-color: red;
+    	backgound-color: red;
+	}
 
 	body, input, select, textarea {
-		color: #7c8081;
+		/* color: #7c8081; */
+		color: red
 		font-family: 'Lato', sans-serif;
 		font-size: 15pt;
 		font-weight: 300;
@@ -2125,10 +2139,9 @@ input, select, textarea {
 /* Button */
 
 	input[type="button"],
-	input[type="submit"],
+	input[type="submit"].submit1,/* createwill.html 목록 */
 	input[type="reset"],
-	button,
-	.button {
+	button{
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -2137,10 +2150,11 @@ input, select, textarea {
 		-webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
 		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-		background: none;
-		border: solid 1px;
+		background:#757575;
+		border: solid 0px;
+		border-color: black;
 		border-radius: 0;
-		color: inherit;
+		color: white;
 		cursor: pointer;
 		display: inline-block;
 		font-size: 0.8em;
@@ -2153,6 +2167,37 @@ input, select, textarea {
 		text-decoration: none;
 		text-transform: uppercase;
 	}
+	
+	input[type="button"],
+	input[type="submit"].submit2,/* createwill.html 글쓰기 */
+	input[type="reset"],
+	button{
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+		-webkit-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+		-ms-transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+		transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+		background:#3fb1a3;
+		border: solid 0px;
+		border-color: black;
+		border-radius: 0;
+		color: white;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 0.8em;
+		font-weight: 900;
+		letter-spacing: 2px;
+		min-width: 18em;
+		padding: 0 0.75em;
+		line-height: 3.75em;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	
 
 		input[type="button"]:hover,
 		input[type="submit"]:hover,

@@ -1,11 +1,22 @@
 @charset "UTF-8";
 
+@font-face{font-familly:'Shiningstar'; src:url(../font/Cafe24Shiningstar.ttf) format('truetype')}
+
+
+
+
 #tit{
     width:650px;
     height:auto;
     margin-left:auto; 
     margin-right:auto;
     text-align:center;
+}
+
+.mai{
+font-family: 'Noto Sans KR';
+font-size: 10em;
+font-weight:300;
 }
         
 table{
@@ -20,12 +31,17 @@ td{
 	width:650px;
     height:50px;
     margin-left:0px; 
-   
+   font-family: 'Noto Sans KR';
+font-size: 1em;
+font-weight:30;
     border-bottom:2px solid gray;
  
 }
         
 #mai{
+	font-family: 'Noto Sans KR';
+font-size: 1em;
+font-weight:30;
 	margin-left:0px;
    background-color: #FFFFFF;
    border-bottom: 1px solid white;
@@ -51,6 +67,7 @@ html {
 
 	*, *:before, *:after {
 		box-sizing: inherit;
+		font-family: 'Nanum Myeongjo';
 	}
 
 	body {

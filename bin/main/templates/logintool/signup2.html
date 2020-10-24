@@ -6,8 +6,16 @@
 <link href="../static/css/writeday.css" rel="stylesheet" th:href="@{/css/writeday.css}" />
 <noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<style type="text/css">
+.index is-preload{
+font-family: 'Noto Sans KR', sans-serif;
+font-size: 2em;
+font-weight:300;
+}
 
-<title>회원가입 페이지</title>
+</style>
+<title>Will : 회원가입</title>
 
 
 
@@ -17,7 +25,7 @@
 
 					<!-- Header -->
 				<header id="header">
-					<h1 id="logo"><a th:href="@{'/'}">Will</a></h1>
+					<h1 id="logo"><a th:href="@{'/'}"></a></h1>
 				</header>
 
 
@@ -26,10 +34,10 @@
 	<form th:action="@{/user/signup}" method="post">
 
 		<div id="tit">
-			<br> <b><font size="6" color="gold">회원가입</font></b> <br>
+			<br> <b><img src="../images/logo.jpg" alt="로드불가" height="70px" width="110px"/></b> <br>
 			<br>
 
-			<div class="buttons">
+			<div class="button">
 				
 			<span>	
 				<input id="btn1" type="checkbox"  onclick="location.href='http://localhost:8886/user/signup3'">변호사/공증인</span>
@@ -50,7 +58,7 @@
 				<tr>
 					<td id="mai">아이디</td>
 					<td colspan="2" align="left">&emsp;
-					<input type="text" name="id" class="userid" placeholder="Id를 입력하세요">
+					<input type="text" name="id" class="userid" placeholder="아이디를 입력하세요">
 				<!-- 	<input type="button"class="myButton" id="temp" value="중복확인"> -->
 					
 				<div class="text-center small mt-2" id="checkMsg"></div>
@@ -66,11 +74,11 @@
 					</td>
 				</tr>
 
-				<!-- <tr>
+				 <tr>
 					<td id="mai" >비밀번호 확인</td>
 					<td colspan="1" align="left">&emsp;<input type="password" name="passwordcheck" maxlength="50" placeholder="동일하게 입력하세요">
 					</td>
-				</tr> -->
+				</tr> 
 
 
 
@@ -123,8 +131,8 @@
 			<br>
 			<br>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="회원가입"> <input type="button" value="취소" onclick="location.href='http://localhost:8886/user/login'">
+				<td colspan="2" align="center"><input type="submit"class="animationbutton"
+					value="회원가입"> <input type="button" class="animationbutton" value="취소" onclick="location.href='http://localhost:8886/user/login'">
 				</td>
 			</tr>
 	</form>

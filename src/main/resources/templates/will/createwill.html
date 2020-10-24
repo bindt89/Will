@@ -2,8 +2,10 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 - 글쓰기</title>
-    <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+    <title>Will : 작성</title>
+ <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+ <!-- <link rel="stylesheet" href="../src/main/resources/static/css/createwill.css"> --> 
+
 </head>
 <body>
 <header th:insert="com/header.html" ></header>
@@ -15,7 +17,7 @@
     		
     		<br><br>
       		 <div class="form-group row">
-            <label for="inputId" class="col-sm-2 col-form-label"><strong>아이디</strong></label>
+            <label for="inputId" class="col-sm-2 col-form-label" style="" ><strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>아이디</u></strong></label>
             <div  class="col-sm-2">
                 <input type="text" name="id" class="form-control"  id="inputId" th:value="${#authentication.name}" readonly="readonly">
                                                                                                                    
@@ -24,19 +26,20 @@
             
         <div class="form-group row">
         
-            <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
+            <label for="inputTitle" class="col-sm-2 col-form-label" style="">
+            <strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>제목</u></strong></label>
             <div class="col-sm-5">
                 <input type="text" name="title" class="form-control" id="inputTitle" placeholder="제목을 입력하세요" required="required">
             </div>
         </div>
-       <div class="form-group row" >
-            <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
+       <div class="form-group row">
+            <label for="inputContent" class="col-sm-2 col-form-label"><strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>내용</u></strong></label>
             <div class="col-sm-10">
                 <textarea name="content" class="form-control" id="inputContent" placeholder="내용을 입력하세요" required="required" style="height: 400px"></textarea>
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputFile" class="col-sm-2 col-form-label"><strong>첨부 파일</strong></label>
+            <label for="inputFile" class="col-sm-2 col-form-label"><strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>첨부 파일</u></strong></label>
             <div class="col-sm-10">
                 <div class="custom-file" id="inputFile">
                     <input name="file" type="file" class="custom-file-input" id="customFile">
@@ -47,8 +50,13 @@
         <div class="row">
             <div class="col-auto mr-auto"></div>
             <div class="col-auto">
-             <a class="btn btn-primary" th:href="@{/user/will/list}" role="button">리스트</a>
-                <input class="btn btn-primary" type="submit" role="button" value="글쓰기">
+             <input class="submit1" th:href="@{/user/will/list}" type="submit" role="button" value="목록">
+                <!--style=" height:54px; font-weight: bold; font-size:large; text-align:center;
+                       width : 250px; background-color:#e8e8e8; border-color: gray; color:#545454;"-->
+            
+            
+             
+                <input class="submit2" type="submit" role="button" value="글쓰기">
              
             </div>
         </div>
@@ -58,7 +66,7 @@
         <footer th:insert="com/footer.html"></footer>
 
     </form>
-</div>
+<!-- </div> -->
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>

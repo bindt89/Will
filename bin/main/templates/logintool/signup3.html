@@ -9,18 +9,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link  href="../static/css/iogin.css" rel="stylesheet"  th:href="@{/css/login.css}" />
 		<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+	<link href="../static/css/writeday.css" rel="stylesheet" th:href="@{/css/writeday.css}" />
+	
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>로그인 </title>
+   <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <title>Will : 변호사 회원가입</title>
 </head>
-<body cellpadding="0" cellspacing="0" marginleft="0" background-color="white" margintop="0" width="100%" height="100%" align="center">
+<body cellpadding="0" cellspacing="0" marginleft="50px" background-color="white" margintop="0" width="100%" height="100%" >
     <h1 id="logo" align="center"><a th:href="@{'/'}"><img src="../images/logo.jpg" alt="로드불가" height="80px" width="110px" margin-bottom="30px"/></a></h1>
-    <hr>
+    
 
    
 		<!-- Header -->
 				<header id="header">
-					<h1 id="logo"><a th:href="@{'/'}">Will</a></h1>
+					<h1 id="logo"><a th:href="@{'/'}"></a></h1>
 				</header>
 	
 
@@ -30,12 +32,12 @@
        
  	<div id="tit">
         <br>
-        <b><font size="6" color="gold">변호사 회원가입</font></b>
+        <b></b>
         <br><br>
 
 		<div  class="buttons">
  <span>	
-				<input id="btn" type="checkbox"  onclick="location.href='http://localhost:8886/user/signup2'">작성자</span>
+				<input id="btn" type="checkbox"  onclick="location.href='http://localhost:8886/user/signup2'">일반</span>
 
 </div> 
 
@@ -125,8 +127,8 @@
 		<br><br>
 			<tr>
 				<td colspan="2" align="center">
-					<input  type="submit" value="회원가입">
-					<input type="button" value="취소" onclick="location.href='http://localhost:8886/user/login'">
+					<input  type="submit" class="animationbutton" value="회원가입">
+					<input type="button" class="animationbutton" value="취소" onclick="location.href='http://localhost:8886/user/login'">
 				</td>
 			</tr>
     </form>
