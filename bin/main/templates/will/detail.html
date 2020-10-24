@@ -13,9 +13,9 @@
             <h5 class="card-title" th:text="@{${post.title} + ' - ' + ${post.id}}"></h5>
             <p class="card-text"><small class="text-muted" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></small></p>
             <p class="card-text" th:text="${post.content}"></p>
-            <div th:if="${post.fileId != null}">
+            <div>
                 <strong>첨부파일 : </strong>
-                <a class="card-text" th:href="@{'/download/' + ${post.fileId}}" th:text="${post.fileId}"></a>
+                <a class="card-text" th:href="@{'/download/' + ${post.fileId}}" th:text="${file.origFilename}"></a>
             </div>
         </div>
     </div>
@@ -28,12 +28,11 @@
             <form id="delete-form" th:action="@{'/createwill/' + ${post.no}}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
                 <button id="delete-btn" type="submit" class="btn btn-danger">삭제</button>
-                
-               <footer th:insert="com/footer.html"></footer>
             </form>
         </div>
     </div>
 </div>
+<footer th:insert="com/footer.html"></footer>
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>

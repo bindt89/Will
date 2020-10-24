@@ -87,18 +87,28 @@
         <input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required><br>
         <div class="checkbox">
           <label>
-            <input type="checkbox" value="remember-me"> 아이디 유지하기
-            
+
+            <input type="checkbox" id="idSaveCheck" value="remember-me"> ID 기억하기
+
           </label>
+          <!-- 
+            <div class="error" id="err_empty_password" style="display:none" aria-live="assertive"></div>
+					<div class="error" aria-live="assertive">
+								<p>가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</p>
+							</div> -->
+          
         </div>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" style="background-color:#b96c5f" type="submit">로 그 인</button>
-        <button id="btn-No" class="btn btn-lg btn-primary btn-block" style="background-color:#b96c5f" th:onclick="">취소</button>
+        <button id="btn-No" class="btn btn-lg btn-primary btn-block" style="background-color:#b96c5f" th:onclick="">비밀번호 찾기</button><br><br>
 
+
+  			
+  			
      	
-        
-        
-        
-    
+     	
+     	
+     	
+       
         
         
         
@@ -117,5 +127,74 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+  
+  
+  <script type="text/javascript">
+$(document).ready(function() {
+    var userInputId = getCookie("userInputId");
+    var setCookieYN = getCookie("setCookieYN");
+    
+    if(setCookieYN == 'Y') {
+        $("#idSaveCheck").prop("checked", true);
+    } else {
+        $("#idSaveCheck").prop("checked", false);
+    }
+    
+    $("#id").val(userInputId); 
+    
+    //로그인 버튼 클릭
+    $('#btn-Yes').click(function() {
+        if($("#idSaveCheck").is(":checked")){ 
+            var userInputId = $("#id").val();
+            setCookie("userInputId", userInputId, 60); 
+            setCookie("setCookieYN", "Y", 60);
+        } else {
+            deleteCookie("userInputId");
+            deleteCookie("setCookieYN");
+        }
+        
+        document.fform.submit();
+    });
+});
+
+//쿠키값 Set
+function setCookie(cookieName, value, exdays){
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + 
+    exdate.toGMTString());
+    document.cookie = cookieName + "=" + cookieValue;
+}
+
+//쿠키값 Delete
+function deleteCookie(cookieName){
+    var expireDate = new Date();
+    expireDate.setDate(expireDate.getDate() - 1);
+    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+}
+
+//쿠키값 가져오기
+function getCookie(cookie_name) {
+    var x, y;
+    var val = document.cookie.split(';');
+    
+    for (var i = 0; i < val.length; i++) {
+        x = val[i].substr(0, val[i].indexOf('='));
+        y = val[i].substr(val[i].indexOf('=') + 1);
+        x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+        
+        if (x == cookie_name) {
+          return unescape(y); // unescape로 디코딩 후 값 리턴
+        }
+    }
+}
+</script>
+
+
+
+  
+  
+  
+  
   </body>
 </html>

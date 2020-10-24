@@ -53,19 +53,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.permitAll()
                 // 페이지 권한 설정
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/myinfo").hasRole("MEMBER")
+                .antMatchers("/myinfo2").hasRole("MEMBER")
 			
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 
              // law 페이지 권한 설정
                 .antMatchers("/admin2/**").hasRole("ADMIN2")
-                .antMatchers("/user/myinfo2").hasRole("LAWYER")
+                .antMatchers("/myinfo4").hasRole("LAWYER")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and() 
                 
-                // 로그인 설정
+                .csrf()
+    			.ignoringAntMatchers("/check/findPw/sendEmail")
+    			.ignoringAntMatchers("/check/Pw")
+    			.ignoringAntMatchers("/check/Pw/changePw")
+    			.ignoringAntMatchers("/idCheck/sendEmail")
+    			.ignoringAntMatchers("/CertifiedCheck")
+                
+                
+                
+    			.and()// 로그인 설정
                .formLogin()
                .loginPage("/user/login")
                 .defaultSuccessUrl("/user/login/result")

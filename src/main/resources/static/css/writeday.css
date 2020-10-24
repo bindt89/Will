@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
+
 @font-face{font-familly:'Shiningstar'; src:url(../font/Cafe24Shiningstar.ttf) format('truetype')}
 
 
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+</style>
 
 #tit{
     width:650px;
@@ -12,13 +15,16 @@
     margin-right:auto;
     text-align:center;
 }
-
-.mai{
-font-family: 'Noto Sans KR';
-font-size: 10em;
+ .mai{
+font-family: 'Noto Sans KR', sans-serif;
+font-size: 2em;
 font-weight:300;
 }
-        
+ .index is-preload{
+font-family: 'Noto Sans KR', sans-serif;
+font-size: 2em;
+font-weight:300;
+}
 table{
 	width:650px;
     height:auto;
@@ -39,9 +45,11 @@ font-weight:30;
 }
         
 #mai{
-	font-family: 'Noto Sans KR';
-font-size: 1em;
-font-weight:30;
+
+	font-family: 'helvetica';
+font-size: 1.25em;
+font-weight:200px;
+
 	margin-left:0px;
    background-color: #FFFFFF;
    border-bottom: 1px solid white;
@@ -74,7 +82,7 @@ html {
 	margin: 0;
     height: 100%;
     background: #FFFFFF;
-    font-family: Dotum,'돋움',Helvetica,sans-serif;
+    font-family: font-family: 'Noto Sans KR', sans-serif; /*  Dotum,'돋움',Helvetica,sans-serif; */
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -86,6 +94,7 @@ html {
 			-webkit-transition: none !important;
 			-ms-transition: none !important;
 			transition: none !important;
+			font-family:'Noto Sans KR', sans-serif;
 		}
 		
 		
@@ -198,4 +207,3 @@ html {
 				}
 
 		}
-		

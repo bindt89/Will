@@ -2,6 +2,7 @@ package com.will.controller;
 
 
    import com.will.dto.FileDto;
+import com.will.dto.QnAFileDto;
 import com.will.dto.WillDto;
 import com.will.service.WillService;
 import com.will.util.MD5Generator;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,6 +49,8 @@ import java.util.List;
             model.addAttribute("WillList", WillDtoList);
            return "will/list";
        }
+    
+
        //유언장 작성 페이지
        @GetMapping("/user/createwill")
        public String dispcreatewill() {
@@ -56,31 +60,38 @@ import java.util.List;
        @PostMapping("/user/createwill")
        public String createwill(@RequestParam("file") MultipartFile files, WillDto WillDto) {
            try {
-                String origFilename = files.getOriginalFilename();
-                String filename = new MD5Generator(origFilename).toString();
-                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-                String savePath = System.getProperty("user.dir") + "\\files";
-                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-                if (!new File(savePath).exists()) {
-                    try{
-                        new File(savePath).mkdir();
-                    }
-                    catch(Exception e){
-                        e.getStackTrace();
-                    }
-                }
-                String filePath = savePath + "\\" + filename;
-                files.transferTo(new File(filePath));
-
-                FileDto fileDto = new FileDto();
-                fileDto.setOrigFilename(origFilename);
-                fileDto.setFilename(filename);
-                fileDto.setFilePath(filePath);
-
-                Long fileId = FileService.saveFile(fileDto);
-                WillDto.setFileId(fileId);
+        	   if(!files.getOriginalFilename().isEmpty())
+        	   {
+	                String origFilename = files.getOriginalFilename();
+	                String filename = new MD5Generator(origFilename).toString();
+	                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+	                String savePath = System.getProperty("user.dir") + "\\files";
+	                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+	                if (!new File(savePath).exists()) {
+	                    try{
+	                        new File(savePath).mkdir();
+	                    }
+	                    catch(Exception e){
+	                        e.getStackTrace();
+	                    }
+	                }
+	                String filePath = savePath + "\\" + filename;
+	                files.transferTo(new File(filePath));
+	
+	                FileDto fileDto = new FileDto();
+	                fileDto.setOrigFilename(origFilename);
+	                fileDto.setFilename(filename);
+	                fileDto.setFilePath(filePath);
+	
+	                Long fileId = FileService.saveFile(fileDto);
+	                WillDto.setFileId(fileId);
+        	   }
+        	   
                 WillService.savePost(WillDto);
-            } catch(Exception e) {
+            
+           
+           
+           } catch(Exception e) {
                 e.printStackTrace();
             }
            return "redirect:/user/will/list";
@@ -89,14 +100,35 @@ import java.util.List;
        @GetMapping("/createwill/{no}")
        public String detail(@PathVariable("no") Long no, Model model) {
            WillDto willDto = WillService.getPost(no);
+           FileDto FileDto;
+           
+           
+    	   try {
+    		   long id = willDto.getFileId();
+    		   FileDto = FileService.getFile(id);
+    	   }
+    	   catch(Exception e) {
+    		   FileDto= new FileDto((long) 0,"파일없음","파일없음","");
+    	   }
            model.addAttribute("post", willDto);
+           model.addAttribute("file", FileDto);
            return "will/detail";
        }
-       
+
        @GetMapping("/createwill/edit/{no}")
        public String edit(@PathVariable("no") Long no, Model model) {
            WillDto willDto = WillService.getPost(no);
+           FileDto FileDto;
+           
+           try {
+    		   long id = willDto.getFileId();
+    		   FileDto = FileService.getFile(id);
+    	   }
+    	   catch(Exception e) {
+    		   FileDto= new FileDto((long) 0,"파일없음","파일없음","");
+    	   }
            model.addAttribute("post", willDto);
+           model.addAttribute("file", FileDto);
            return "will/edit.html";
        }
        
@@ -111,6 +143,13 @@ import java.util.List;
            WillService.deleteWill(no);
            return "redirect:/user/will/list";
        }
+       @DeleteMapping("/edit/{id}")
+       public String deletefile(@PathVariable("id") Long id) {
+           FileService.deleteFile(id);
+          
+           
+           return "/";
+       }
        @GetMapping("/download/{fileId}")
        public ResponseEntity<Resource> fileDownload(@PathVariable("fileId") Long fileId) throws IOException {
            FileDto fileDto = FileService.getFile(fileId);
@@ -118,8 +157,9 @@ import java.util.List;
            Resource resource = new InputStreamResource(Files.newInputStream(path));
            return ResponseEntity.ok()
                    .contentType(MediaType.parseMediaType("application/octet-stream"))
-                   .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDto.getOrigFilename() + "\"")
+                   .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + URLEncoder.encode(fileDto.getOrigFilename(),"utf-8") + "\"")
                    .body(resource);
+
        }
        
    }

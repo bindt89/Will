@@ -18,8 +18,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="text-center" th:each="post : ${WillList}">
-            <th scope="row">
+        <tr  class="text-center" th:if="${not #lists.isEmpty( WillList )}" th:each="post : ${WillList}">
+            <th scope="row" >
                 <span th:text="${post.no}"></span>
             </th>
             <td>
@@ -37,13 +37,31 @@
         </tr>
         </tbody>
     </table>
+    <th:block layout:fragment="paging">
+				<nav aria-label="Page navigation" class="text-center">
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
     <div class="row">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
-            <a class="btn btn-primary" th:href="@{/user/write}" role="button">글쓰기</a>
+            <a class="btn btn-primary" th:href="@{/user/createwill}" role="button">글쓰기</a>
         </div>
     </div>
 </div>
+
 <footer th:insert="com/footer.html"></footer>
 <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>

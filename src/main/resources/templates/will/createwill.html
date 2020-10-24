@@ -15,11 +15,13 @@
    
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     		
+
     		<br><br>
       		 <div class="form-group row">
             <label for="inputId" class="col-sm-2 col-form-label" style="" ><strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>아이디</u></strong></label>
+
             <div  class="col-sm-2">
-                <input type="text" name="id" class="form-control"  id="inputId" th:value="${#authentication.name}" readonly="readonly">
+                <input type="text" name="id" class="form-control"  id="inputId" th:value="${#authentication.name}" readonly="readonly" >
                                                                                                                    
                  </div>
             </div>
@@ -29,7 +31,7 @@
             <label for="inputTitle" class="col-sm-2 col-form-label" style="">
             <strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>제목</u></strong></label>
             <div class="col-sm-5">
-                <input type="text" name="title" class="form-control" id="inputTitle" placeholder="제목을 입력하세요" required="required">
+                <input type="text" name="title" class="form-control" id="inputTitle" placeholder="제목을 입력하세요" required="required" style="background-color: #fff">
             </div>
         </div>
        <div class="form-group row">
@@ -42,7 +44,7 @@
             <label for="inputFile" class="col-sm-2 col-form-label"><strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>첨부 파일</u></strong></label>
             <div class="col-sm-10">
                 <div class="custom-file" id="inputFile">
-                    <input name="file" type="file" class="custom-file-input" id="customFile">
+                    <input name="file" multiple type="file" class="custom-file-input" id="customFile">
                     <label class="custom-file-label" for="customFile">파일을 선택해 주세요.</label>
                 </div>
             </div>
@@ -61,7 +63,7 @@
             </div>
         </div>
         </div>
-        
+        <br><br><br>
         
         <footer th:insert="com/footer.html"></footer>
 

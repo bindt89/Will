@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -54,6 +55,8 @@ import java.util.List;
        @PostMapping("/user/write")
        public String QnAwrite(@RequestParam("file") MultipartFile files, QnADto QnADto) {
            try {
+        	   if(!files.getOriginalFilename().isEmpty())
+        	   {
                 String origFilename = files.getOriginalFilename();
                 String filename = new QnAMD5Generator(origFilename).toString();
                 /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
@@ -77,17 +80,31 @@ import java.util.List;
 
                 Long fileId = QnAFileService.saveQnAFile(QnAfileDto);
                 QnADto.setFileId(fileId);
-                QnAService.savePost(QnADto);
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
+                
+            } 
+           
+                 QnAService.savePost(QnADto);
+                 
+           }catch(Exception e) {
+                     e.printStackTrace();
+                 }
            return "redirect:/user/QnA/list";
        }
        
        @GetMapping("/write/{no}")
-       public String QnAdetail(@PathVariable("no") Long no, Model model) {
-    	   QnADto QnADto = QnAService.getPost(no);
-           model.addAttribute("post", QnADto);
+       public String QnAdetail(@PathVariable("no") Long no ,Model model) {
+    	   QnADto qnADto = QnAService.getPost(no);
+    	   QnAFileDto qnAFileDto;
+    	   try {
+    		   Long id = qnADto.getFileId();
+    		   qnAFileDto = QnAFileService.getFile(id);
+    	   }
+    	   catch(Exception e) {
+    		   
+    		   qnAFileDto= new QnAFileDto((long) 0,"파일없음","파일없음","");
+    	   }
+           model.addAttribute("post", qnADto);
+           model.addAttribute("file",qnAFileDto);
            return "QnA/detail";
        }
        
@@ -116,7 +133,7 @@ import java.util.List;
            Resource resource = new InputStreamResource(Files.newInputStream(path));
            return ResponseEntity.ok()
                    .contentType(MediaType.parseMediaType("application/octet-stream"))
-                   .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + QnAfileDto.getOrigFilename() + "\"")
+                   .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + URLEncoder.encode(QnAfileDto.getOrigFilename(),"utf-8") + "\"")
                    .body(resource);
        }
        

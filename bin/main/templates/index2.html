@@ -22,7 +22,7 @@
 					<h1 id="logo"><a th:href="@{'/'}">Will</a></h1>
 					<nav id="nav">
 						<ul>
-							<li class="current"><a th:href="@{/}">Welcome</a></li>
+							<li id="create"><a sec:authorize="isAuthenticated()" th:href="@{/user/createwill}">문서작성</a></li>
 							<li class="submenu">
 								<a href="#">Layouts</a>
 								<ul>
@@ -48,11 +48,9 @@
                         
                     
                            <ul>
-                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">내 정보</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">진행 상황 보기</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/createwill}">문서작성</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/QnA/list}">Q&A</a></li>
-                           <li><a sec:authorize="isAuthenticated()" th:href="@{/user/info}">전자 서명</a></li>
+                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">내 정보</a></li>                          
+           <!--                 <li><a sec:authorize="isAuthenticated()" th:href="@{/user/createwill}">문서작성</a></li> -->
+ 
                         </ul>   
                        
                         
