@@ -53,13 +53,13 @@ public class MemberEntity extends TimeEntity {
     private String addr;
 
 
-//    @Column
-//    private boolean enabled;
+    @Column
+    private boolean enabled;
     
     @Builder
     public MemberEntity  (Long no, String name,  String id, String password, 
     		String email, String birthdate, String gender ,String  hp, String addr
-    		,LocalDateTime createdDate) {
+    		,LocalDateTime createdDate , boolean enabled) {
     
         this.no = no;
         this.name = name;
@@ -70,7 +70,7 @@ public class MemberEntity extends TimeEntity {
         this.gender = gender;
         this.hp = hp;
         this.addr = addr;
-//        this.enabled = enabled;
+        this.enabled = enabled;
     }
 
 
