@@ -96,7 +96,7 @@ import java.util.List;
             }
            return "redirect:/user/will/list";
        }
-       
+       //디테일
        @GetMapping("/createwill/{no}")
        public String detail(@PathVariable("no") Long no, Model model) {
            WillDto willDto = WillService.getPost(no);
@@ -114,7 +114,7 @@ import java.util.List;
            model.addAttribute("file", FileDto);
            return "will/detail";
        }
-
+       //유언장 수정 페이지
        @GetMapping("/createwill/edit/{no}")
        public String edit(@PathVariable("no") Long no, Model model) {
            WillDto willDto = WillService.getPost(no);
@@ -131,18 +131,19 @@ import java.util.List;
            model.addAttribute("file", FileDto);
            return "will/edit.html";
        }
-       
+       //유언장 수정
        @PutMapping("/createwill/edit/{no}")
        public String update(WillDto willDto) {
            WillService.savePost(willDto);
            return "redirect:/user/will/list";
        }
-       
+       //유언장 삭제
        @DeleteMapping("/createwill/{no}")
        public String delete(@PathVariable("no") Long no) {
            WillService.deleteWill(no);
            return "redirect:/user/will/list";
        }
+       //파일 삭제
        @DeleteMapping("/edit/{id}")
        public String deletefile(@PathVariable("id") Long id) {
            FileService.deleteFile(id);
@@ -160,6 +161,12 @@ import java.util.List;
                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + URLEncoder.encode(fileDto.getOrigFilename(),"utf-8") + "\"")
                    .body(resource);
 
+       }
+       
+     //변호사 선택 페이지
+       @GetMapping("/user/choice")
+       public String dispchoice() {
+           return "will/choice";
        }
        
    }

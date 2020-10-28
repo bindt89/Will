@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div th:insert="com/header.html" id="header"></div>
+<div th:insert="com/header"></div>
 
     
     <div id="pr1" class="widget smk_sidebar_4zz4 widget_nav_menu"><h3 class="title"><span>마이페이지</span></h3><br><br>
@@ -34,15 +34,15 @@
 				th:onclick="loction.herf=''"></li>&nbsp;
 		</form>
 		
-		<div>
+		<form th:action="@{/user/QnA/list}" method="get" style='line-height:1em'>
 		<li id="pag1"><input  type="submit" value="Q&A"
 				th:onclick="loction.herf=''"></li>&nbsp;
-		</div>
+		</form>
 		
-		<div>
+		<form th:action="@{/user/will/list}" method="get" style='line-height:1em'>
 		<li id="pag1"><input  type="submit" value="진행상황 보기"
 				th:onclick="loction.herf=''"></li>&nbsp;
-		</div>
+		</form>
 		
 		
 		

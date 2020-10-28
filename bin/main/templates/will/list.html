@@ -7,6 +7,7 @@
 </head>
 <body>
 <header th:insert="com/header.html"></header>
+<br><br>
 <div class="container">
     <table class="table"><br><br>
         <thead class="thead-light">
@@ -14,11 +15,15 @@
             <th scope="col">no</th>
             <th scope="col">아이디</th>
             <th scope="col">제목</th>
+            <th scope="col">진행상태</th>
             <th scope="col">작성일</th>
+            <th scope="col">공증인</th>
         </tr>
         </thead>
+        <h1>진행중인건</h1>
         <tbody>
         <tr  class="text-center" th:if="${not #lists.isEmpty( WillList )}" th:each="post : ${WillList}">
+        
             <th scope="row" >
                 <span th:text="${post.no}"></span>
             </th>
@@ -30,10 +35,16 @@
                     <span th:text="${post.title}"></span>
                 </a>
             </td>
+           <td>
+                <span th:text="작성중"></span>
+            </td>
            
             <td>
                 <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
             </td>
+            <td>
+            <a class="btn btn-dark" th:href="@{/user/choice}" role="button">변호사지정</a>
+            <td>
         </tr>
         </tbody>
     </table>
