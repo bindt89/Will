@@ -6,20 +6,20 @@
 
 
 input[type=text] {
- padding: 5px;
+ padding: 7px;
  text-align: left;
  margin: 0px;
 }
 
 
  input[type=password] {
- padding: 5px;
+ padding: 7px;
  text-align:left;
  margin: 0px;
 }
 
  input[type=date] {
- padding: 5px;
+ padding: 7px;
  text-align: center;
  margin: 0px;
 }
@@ -93,7 +93,7 @@ html {
 		font-family: 'Nanum Myeongjo';
 	}
 
-body {
+	body {
 	margin: 0;
     height: 100%;
     background: #FFFFFF;

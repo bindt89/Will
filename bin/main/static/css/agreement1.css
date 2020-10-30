@@ -7,15 +7,15 @@
 
 #langSelect {
 	
-	margin-right: 50px;
+	margin-right: 100px;
 	margin-left: 800px;
 	border: 8px solid sky blue;
 }
 
 #chk_all{
 	
-	margin-right: auto;
-	margin-left: 455px;
+	margin-right: 10px;
+	margin-left: 350px;
 	
 }
 
@@ -24,6 +24,7 @@
 .input_chk {
 	
 	    margin-left: -200px;
+
 }
 
 .terms_bx{
@@ -39,16 +40,16 @@
 	overflow-x: hidden;
   	overflow-y: auto;
 	height:300px;
-	width: 800px;
+	width: 750px;
 	margin-left: auto;
-    margin-right: auto;
+    margin-right: 100px;
 }
 .article{
 	
 	width: 650px;
 	height: auto;
 	margin-right: 500px;
-
+	margin-left: 10px;
 }
 
 .article__title{
@@ -78,10 +79,10 @@
 
 
 .article__text {
-   width: auto;;
+   width: 650px;
 	height: auto;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 6px;
+	margin-right: 6px;
 	
 }
 
@@ -101,7 +102,7 @@
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
-  margin-left: 200px;
+  margin-left: 270px;
 }
 .animationbutton:hover{
   background:#fff;

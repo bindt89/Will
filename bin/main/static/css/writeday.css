@@ -35,7 +35,9 @@ input[type=text] {
     text-align:center;
 }
 
+
 }
+
  .index is-preload{
 font-family: 'Noto Sans KR', sans-serif;
 font-size: 2em;
@@ -93,11 +95,11 @@ html {
 		font-family: 'Nanum Myeongjo';
 	}
 
-	body {
+body {
 	margin: 0;
     height: 100%;
     background: #FFFFFF;
-    font-family: font-family: 'Noto Sans KR', sans-serif; /*  Dotum,'돋움',Helvetica,sans-serif; */
+    font-family: 'Noto Sans KR', sans-serif; /*  Dotum,'돋움',Helvetica,sans-serif; */
 	}
 
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {

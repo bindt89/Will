@@ -48,10 +48,11 @@
         </tr>
         </tbody>
     </table>
-    <th:block layout:fragment="paging">
-				<nav aria-label="Page navigation" class="text-center">
-					<ul class="pagination">
-						<li>
+    <th:block layout:fragment="paging"  >
+				<nav aria-label="Page navigation" class="text-left" >
+					<ul class="pagination" >
+						
+						<li class="text-center">
 							<a href="#" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
 							</a>
@@ -64,8 +65,9 @@
 						<li>
 							<a href="#" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
-							</a>
-    <div class="row">
+							</a><br><br>
+							
+    <div class="row" style="text-align: right;">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
             <a class="btn btn-primary" th:href="@{/user/createwill}" role="button">글쓰기</a>

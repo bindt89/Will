@@ -7,9 +7,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-      <link  href="../static/css/iogin.css" rel="stylesheet"  th:href="@{/css/login.css}" />
-      <noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<link  href="../static/css/iogin.css" rel="stylesheet"  th:href="@{/css/login.css}" />
+		<noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Will : 로그인</title>
 </head>
@@ -25,61 +25,61 @@
     
        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-         
-            
-         <!--    <div>
-            
-            
-            
-            <tr >
-         
-               <td >
-               <c:if test="${save=='yes' }">
-               <input type="text" name="id" size="10" placeholder="아이디"
-               required="required" class="form-contol" value="${id}"></c:if> 
-               
-               <c:if test="${save=='no' }">
-               <input type="text" name="id" size="10" placeholder="아이디"
-                  required="required" class="form-contol"></c:if> 
-         
-                  
-            <!--    <input type="checkbox" name="idsave" ${save=='yes'?"checked":"" }>아이디저장
-               </td>
-               <input type="text" name="id" size="10" placeholder="아이디"
-               required="required" class="form-contol">
-               
-               </td>
-            </tr>
-            
-            
-            
-            <tr>
-               
-               <td><input type="password" name="password" size="10"
-                  placeholder="비밀번호" required="required">
-               </td>
-            </tr>
-            
-            <tr>
-               <td>
-               <input type="submit" value="로그인"> 
-               
-            <input type="checkbox" name="idsave" ${save=='yes'?"checked":"" }>아이디저장
-                    onclick=>
-                   </td>
-            </tr>
-               </div>    -->
-   
-   
-   <div class="card align-middle" style="width:30rem; border-radius:10px;">
-   
-      <div class="card-title" style="margin-top:10px;">
-         <span><h2 class="card-title text-center" style="color:#113366;">로그인 </h2>
-         <input id="btn" type="checkbox" onclick="location.href='http://localhost:8886/user/login1'">변호사
-         
-         <!-- <a th:href="@{/user/login1}" id="btn" type="button" class="btn-btn-primary" role="button">변호사</a> --></spen>
-      </div>
-      <div class="card-body">
+			
+				
+			<!-- 	<div>
+				
+				
+				
+				<tr >
+			
+					<td >
+					<c:if test="${save=='yes' }">
+					<input type="text" name="id" size="10" placeholder="아이디"
+					required="required" class="form-contol" value="${id}"></c:if> 
+					
+					<c:if test="${save=='no' }">
+					<input type="text" name="id" size="10" placeholder="아이디"
+						required="required" class="form-contol"></c:if> 
+			
+						
+				<!-- 	<input type="checkbox" name="idsave" ${save=='yes'?"checked":"" }>아이디저장
+					</td>
+					<input type="text" name="id" size="10" placeholder="아이디"
+					required="required" class="form-contol">
+					
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					
+					<td><input type="password" name="password" size="10"
+						placeholder="비밀번호" required="required">
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+					<input type="submit" value="로그인"> 
+					
+				<input type="checkbox" name="idsave" ${save=='yes'?"checked":"" }>아이디저장
+          			 onclick=>
+          			</td>
+				</tr>
+					</div>	 -->
+	
+	
+	<div class="card align-middle" style="width:30rem; border-radius:10px;">
+	
+		<div class="card-title" style="margin-top:10px;">
+			<span><h2 class="card-title text-center" style="color:#113366;">로그인 </h2>
+			<input id="btn" type="checkbox" onclick="location.href='http://localhost:8886/user/login1'">변호사
+			
+			<!-- <a th:href="@{/user/login1}" id="btn" type="button" class="btn-btn-primary" role="button">변호사</a> --></spen>
+		</div>
+		<div class="card-body">
          <h5 class="form-signin-heading">정보를 입력하세요</h5>
         <label for="inputid" class="sr-only">Your ID</label>
         <input type="text" id="id" name="username" class="form-control" placeholder="아이디" required autofocus><BR>
@@ -93,35 +93,35 @@
           </label>
           <!-- 
             <div class="error" id="err_empty_password" style="display:none" aria-live="assertive"></div>
-               <div class="error" aria-live="assertive">
-                        <p>가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</p>
-                     </div> -->
+					<div class="error" aria-live="assertive">
+								<p>가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.</p>
+							</div> -->
           
         </div>
         <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" style="background-color:#b96c5f" type="submit">로 그 인</button><br>
         <a sec:authorize="isAnonymous()"  th:href="@{/searchpass}">비밀번호 찾기</a><br><br>
 
 
-           
-           
-        
-        
-        
-        
+  			
+  			
+     	
+     	
+     	
+     	
        
         
         
         
       </form>
       
-      </div>
-   </div>
+		</div>
+	</div>
 
 
 
 
-   <div class="modal">
-   </div>
+	<div class="modal">
+	</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -222,10 +222,10 @@ function getCookie(cookie_name) {
                                     "name": name
                                 },
                                 
-                        success: function (res) {
-                           window.location = "/login";
-                        }
-                        
+								success: function (res) {
+									window.location = "/login";
+								}
+								
                             })
                             
                         }

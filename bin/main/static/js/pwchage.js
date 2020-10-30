@@ -34,25 +34,25 @@ $('#newPwCheck').on('propertychange change keyup paste input', function() {
 $("#checkPassword").click(function () {
 	
 	let currentpw = $("#currentPw").val();
-	let email = $("#email").val();
+	let id = $("#id").val();
 	
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8090/check/Pw",
+		url: "http://localhost:8886/check/Pw",
 		data: { "currentpw": currentpw,
-				"email": email
+				"id": id
 		},
 		datatype: "json",
 		success: function() {
 			
-		let email = $("#email").val();
+		let id = $("#id").val();
         let newpw = $("#newPw").val();
                         
             $.ajax({
 	            type: "POST",
 	            url: "/check/Pw/changePw",
 	            data: {
-	                "email": email,
+	                "id": id,
 	                "newpw": newpw
 	            },
 				success: function () {

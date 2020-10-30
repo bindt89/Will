@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>비밀번호 변경</title>
 </head>
 <body>
 
@@ -29,12 +29,16 @@
 
                 <!-- ID -->
 
+		
+	
+                <          <!-- ID -->
+
                 <div>
                     <h3 class="join_title"><br>
                         <label for="id">현재 비밀번호</label>
                     </h3>
                 <span class="box int_id">
-                        <input id="currentPw" class="input100" type="password" name="currentpw" placeholder="현재 비밀번호">       
+                <input id="currentPw" class="input100" type="password" name="currentpw"  placeholder="현재 비밀번호">       
                     </span>
                     <span class="error_next_box"></span>
                 </div><br>
@@ -60,7 +64,7 @@
                 
                <!-- JOIN BTN-->
                 <div class="btn_area">
-                   <button type="submit" id="btnJoin">비밀번호 수정</button><br><br><br>
+                   <button type="button" id="checkPassword">비밀번호 수정</button><br><br><br>
                 </div>
 
             <div class="text-center small mt-2" id="passwordMsg" style="color: red"></div>
@@ -74,6 +78,7 @@
         </form>
 
 	<script src="/js/pwchage.js"></script>  
+	<script src="/js/main.js"></script>
    <div th:insert="com/footer.html"  ></div> <br><br>   
    
         
