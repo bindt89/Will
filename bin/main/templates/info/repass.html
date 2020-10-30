@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<head>
+<meta charset="UTF-8">
+
+<title>비밀번호 변경</title>
+</head>
+<body>
+
+<div th:insert="com/header.html"  ></div> <br><br>
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<div class="container-login100">
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-50 p-b-30">
+			<form th:action="@{/user/logout}" method="post" class="login100-form validate-form">
+				<!-- <input type="hidden" name="_method" value="put"/>  -->
+    			<input type="hidden" name="no" th:value="${currentUser.no}"/>
+    			<input type="hidden" id="birthdate" name="birthdate" th:value="${currentUser.birthdate}" readonly/>
+    			<input type="hidden" id="gender" name="gender" th:value="${currentUser.gender}" readonly/>
+    			<input type="hidden" id="addr" name="addr" th:value="${currentUser.addr}" readonly/>
+    			<input type="hidden" id="email" name="email" th:value="${currentUser.email}" readonly/>
+    			<input type="hidden" id="hp" name="hp" th:value="${currentUser.hp}" readonly/>
+    			<input type="hidden" id="name" name="name" th:value="${currentUser.name}" readonly/>
+    			<input type="hidden" id="id" name="id" th:value="${currentUser.id}" readonly/>
+				    <div id="wrapper">
+
+            <!-- content-->
+            <div id="content">
+
+                <!-- ID -->
+
+		
+	
+                <          <!-- ID -->
+
+                <div>
+                    <h3 class="join_title"><br>
+                        <label for="id">현재 비밀번호</label>
+                    </h3>
+                <span class="box int_id">
+                <input id="currentPw" class="input100" type="password" name="currentpw"  placeholder="현재 비밀번호">       
+                    </span>
+                    <span class="error_next_box"></span>
+                </div><br>
+
+
+                <!-- PW1 -->
+                <div>
+                    <h3 class="join_title"><label for="pswd2">새 비밀번호</label></h3>
+                    <span class="box int_pass_check">
+                        <input id="newPw" class="input100" type="password" name="newpw" placeholder="새 비밀번호">
+                    </span>
+                    <span class="error_next_box"></span>
+                </div><br>
+
+                <!-- PW2 -->
+                <div>
+                    <h3 class="join_title"><label for="name">새 비밀번호 확인</label></h3>
+                    <span class="box int_pass_check">
+                        <input id="newPwCheck" class="input100" type="password" name="newpwcheck" placeholder="새 비밀번호 확인">
+                    </span>
+                    <span class="error_next_box"></span>
+                </div><br><br>
+                
+               <!-- JOIN BTN-->
+                <div class="btn_area">
+                   <button type="button" id="checkPassword">비밀번호 수정</button><br><br><br>
+                </div>
+
+            <div class="text-center small mt-2" id="passwordMsg" style="color: red"></div>
+				<div class="text-center small mt-2" id="newPwMsg" style="color: red"></div>
+
+				<div class="text-center">
+					<a th:href="@{/user/info}" class="txt2 hov1">
+						취소
+					</a>
+				</div>
+        </form>
+
+	<script src="/js/pwchage.js"></script>  
+	<script src="/js/main.js"></script>
+   <div th:insert="com/footer.html"  ></div> <br><br>   
+   
+        
+</body>
+</html>

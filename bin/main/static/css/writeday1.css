@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+
+@font-face{font-familly:'Shiningstar'; src:url(../font/Cafe24Shiningstar.ttf) format('truetype')}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+
+input[type=text] {
+ padding: 7px;
+ text-align: left;
+ margin: 0px;
+}
+
+
+ input[type=password] {
+ padding: 7px;
+ text-align:left;
+ margin: 0px;
+}
+
+ input[type=date] {
+ padding: 7px;
+ text-align: center;
+ margin: 0px;
+}
+
+
+
+
+#tit{
+    width:650px;
+    height:auto;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align:center;
+}
+
+
+ .index is-preload{
+font-family: 'Noto Sans KR', sans-serif;
+font-size: 2em;
+font-weight:300;
+}
+table{
+	width:650px;
+    height:auto;
+    margin-left:auto; 
+    margin-right:auto;
+   /*  border:1px solid black; */
+}
+        
+td{
+	width:650px;
+    height:40px;
+    margin-left:0px; 
+   font-family: 'Noto Sans KR';
+font-size: 1em;
+font-weight:30;
+    border-bottom:2px solid gray;
+ 
+}
+        
+#mai{
+
+	font-family: 'helvetica';
+font-size: 1.25em;
+font-weight:200px;
+margin-left:500px;
+ background-color: #FFFFFF;
+ border-bottom: 1px solid white;
+}
+
+input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+
+ select, textarea {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+}
+
+
+html {
+		box-sizing: border-box;
+	}
+
+	*, *:before, *:after {
+		box-sizing: inherit;
+		font-family: 'Nanum Myeongjo';
+	}
+
+	body {
+	margin: 0;
+    height: 100%;
+    background: #FFFFFF;
+    font-family: 'Noto Sans KR', sans-serif; /*  Dotum,'돋움',Helvetica,sans-serif; */
+	}
+
+		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+			-moz-animation: none !important;
+			-webkit-animation: none !important;
+			-ms-animation: none !important;
+			animation: none !important;
+			-moz-transition: none !important;
+			-webkit-transition: none !important;
+			-ms-transition: none !important;
+			transition: none !important;
+			font-family:'Noto Sans KR', sans-serif;
+		}
+		
+
+.animationbutton{
+  background:#b96c5f;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:50px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  margin-left: 50px;
+}
+.animationbutton:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.animationbutton:before,.animationbutton:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: gray;
+  transition:400ms ease all;
+}
+.animationbutton:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.animationbutton:hover:before,.animationbutton:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+		
+		
+		
+	.container {
+		margin: 0 auto;
+		max-width: 100%;
+		width: 1400px;
+	}
+
+		.container.medium {
+			width: 1050px;
+		}
+
+		@media screen and (max-width: 1680px) {
+
+			.container {
+				width: 1200px;
+			}
+
+				.container.medium {
+					width: 900px;
+				}
+
+		}
+
+		@media screen and (max-width: 1280px) {
+
+			.container {
+				width: 960px;
+			}
+
+				.container.medium {
+					width: 735px;
+				}
+
+		}
+
+		@media screen and (max-width: 980px) {
+
+			.container {
+				width: 95%;
+			}
+
+				.container.medium {
+					width: 71.25%;
+				}
+
+		}
+
+		@media screen and (max-width: 840px) {
+
+			.container {
+				width: 95%;
+			}
+
+				.container.medium {
+					width: 95%;
+				}
+
+		}
+
+		@media screen and (max-width: 736px) {
+
+			.container {
+				width: 100%;
+			}
+
+				.container.medium {
+					width: 100%;
+				}
+
+		}
