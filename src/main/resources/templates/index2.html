@@ -37,7 +37,7 @@
 							<li class="submenu">
 								<a sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
    								<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/uesr/admin}">어드민</a>
-							</li>&nbsp;
+							</li>
 
 								
 			
@@ -102,8 +102,9 @@
 			<!-- Main -->
 				<article id="main">
 
-					<header class="special container">
-						<span class="icon solid fa-chart-bar"></span>
+					<header class="special container" ><span><img alt="로드불가" src="../images/psb.png" class="icon solid fa-chart-bar"></span>
+						<!-- <span class="icon solid fa-chart-bar"> --> <!-- </span> -->
+					
 						<h2>As this is my <strong>twentieth</strong> freebie for HTML5 UP
 						<br />
 						I decided to give it a really creative name.</h2>

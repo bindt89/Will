@@ -2,11 +2,30 @@
 
 
 @font-face{font-familly:'Shiningstar'; src:url(../font/Cafe24Shiningstar.ttf) format('truetype')}
-
-
-<style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-</style>
+
+
+input[type=text] {
+ padding: 5px;
+ text-align: left;
+ margin: 0px;
+}
+
+
+ input[type=password] {
+ padding: 5px;
+ text-align:left;
+ margin: 0px;
+}
+
+ input[type=date] {
+ padding: 5px;
+ text-align: center;
+ margin: 0px;
+}
+
+
+
 
 #tit{
     width:650px;
@@ -15,10 +34,7 @@
     margin-right:auto;
     text-align:center;
 }
- .mai{
-font-family: 'Noto Sans KR', sans-serif;
-font-size: 2em;
-font-weight:300;
+
 }
  .index is-preload{
 font-family: 'Noto Sans KR', sans-serif;
@@ -35,7 +51,7 @@ table{
         
 td{
 	width:650px;
-    height:50px;
+    height:40px;
     margin-left:0px; 
    font-family: 'Noto Sans KR';
 font-size: 1em;
@@ -49,10 +65,9 @@ font-weight:30;
 	font-family: 'helvetica';
 font-size: 1.25em;
 font-weight:200px;
-
-	margin-left:0px;
-   background-color: #FFFFFF;
-   border-bottom: 1px solid white;
+margin-left:500px;
+ background-color: #FFFFFF;
+ border-bottom: 1px solid white;
 }
 
 input::-moz-focus-inner {
@@ -97,13 +112,13 @@ html {
 			font-family:'Noto Sans KR', sans-serif;
 		}
 		
-		
+
 .animationbutton{
   background:#b96c5f;
   color:#fff;
   border:none;
   position:relative;
-  height:40px;
+  height:50px;
   font-size:1em;
   padding:0 2em;
   cursor:pointer;

@@ -1777,12 +1777,14 @@ input, select, textarea {
 
 		header.special .icon {
 			cursor: default;
-			height: 7em;
-			left: 0;
+			height: 5em;
+			left: 20;
+			right:20;
 			position: absolute;
 			text-align: center;
-			top: 1em;
-			width: 100%;
+			top: -1em;
+			margin-left:-50px;
+			/* width: 100%; */
 		}
 
 			header.special .icon:before {
