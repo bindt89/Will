@@ -52,7 +52,7 @@
 <!-- //스킵네비게이션 -->
 <!-- header -->
 <div id="header" role="banner">
-	<h1><a th:href="index.html" class="h_logo"><img src="../images/logo.jpg" alt="로드불가" height="90px" width="130px"/><span class="blind"></span></a></h1>
+	<h1><a th:href="@{/}" class="h_logo"><img src="../images/logo.jpg" alt="로드불가" height="90px" width="130px"/><span class="blind"></span></a></h1>
 	<div class="lang">
 		<select id="langSelect" name="langSelect" title="언어선택" class="sel">
 			<option value="ko_KR" selected>한국어</option>
@@ -73,7 +73,7 @@
 					<input type="checkbox" id="chk_all" name="chk_all"> &emsp; 
 					<!-- [D] ie7/8에서 checked일때 label에 클래스 on추가해주세요.  -->
 					<label for="chk_all"><span class="chk_all_txt">Will 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br class='m_br'>
-					 프로모션 정보 수신(선택)에 모두 동의합니다.</span></label>
+					 프로모션 정보 수신(선택)에 모두 동의합니다.</span></label><br><br>
 					</span>
 				</p>
 				<ul class="terms_bx_list">
@@ -242,7 +242,7 @@
 					</p>
 				</div>
 			</div>
-			</li>
+			</li><br><br>
 			<li class="terms_bx">
 			<span class="input_chk">
 			<input type="checkbox" id="termsPrivacy" name="termsPrivacy" class="chk">
@@ -344,7 +344,7 @@
 						</p>
 					</div>
 				</div>
-				</li>
+				</li><br><br>
 				<li class="terms_bx">
 				<span class="input_chk">
 				<input type="checkbox" id="termsLocation" name="termsLocation" value="Y" class="chk">
