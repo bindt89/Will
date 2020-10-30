@@ -66,6 +66,7 @@ public class MemberEntity extends TimeEntity {
     public MemberEntity  (Long no, String name,  String id, String password,
     		String email, String birthdate, String gender ,String  hp, String addr
     		,LocalDateTime createdDate ,boolean enabled , String proof, String usertype) {
+
     
         this.no = no;
         this.name = name;
