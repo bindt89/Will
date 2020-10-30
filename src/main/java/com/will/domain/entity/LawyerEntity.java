@@ -52,11 +52,14 @@ public class LawyerEntity extends TimeEntity {
     
     @Column(length = 100, nullable = false)
     private String addr;
+    
+    @Column
+    private boolean enabled;
 
 
     @Builder
     public LawyerEntity  (Long no, String name,  String id, String password, 
-    		String email, String birthdate, String proof,  String gender ,String  hp, String addr) {
+    		String email, String birthdate, String proof,  String gender ,String  hp, String addr,LocalDateTime createdDate, boolean enabled) {
     	
         this.no = no;
         this.name = name;
@@ -68,6 +71,6 @@ public class LawyerEntity extends TimeEntity {
         this.gender = gender;
         this.hp = hp;
         this.addr = addr;
-   
+        this.enabled = enabled;
     }
 }

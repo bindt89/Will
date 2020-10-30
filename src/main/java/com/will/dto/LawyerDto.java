@@ -22,6 +22,7 @@ public class LawyerDto {
     private String gender;
     private String hp;
     private String addr;
+    private boolean enabled = true;
     private LocalDateTime createdDate2;
     private LocalDateTime modifiedDate2;
 
@@ -38,13 +39,16 @@ public class LawyerDto {
              .gender(gender)
              .hp(hp)
              .addr(addr)
+             .enabled(enabled)
              .build();
+    	
        return lawyerEntity;
     }
 
     @Builder
     public LawyerDto(Long no, String name,  String id, String password, 
-    		String email, String birthdate, String proof, String gender, String  hp, String addr) {
+    		String email, String birthdate, String proof, String gender, String  hp, String addr,
+    		LocalDateTime createdDate2, LocalDateTime modifiedDate2,Boolean enabled) {
         this.no = no;
         this.name = name;
         this.id = id;
@@ -55,6 +59,9 @@ public class LawyerDto {
         this.gender =  gender;
         this.hp = hp;
         this.addr = addr;
+        this.createdDate2 = createdDate2;
+        this.modifiedDate2 =modifiedDate2;
+        this.enabled = enabled;
     }
 
 }
