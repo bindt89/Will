@@ -19,14 +19,12 @@
 					<h1 id="logo"><a th:href="@{'/'}">Will</a></h1>
 					<nav id="nav">
 						<ul>
-							<li id="create"><a sec:authorize="isAuthenticated()" th:href="@{/user/createwill}">문서작성</a></li>
+							<li id="create"><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/user/createwill}">문서작성</a></li>
+							<li id="create"><a sec:authorize="hasRole('ROLE_LAWYER')" th:href="@{/user/will/list}">문서수정</a></li>
 							<li class="submenu">
 								<a href="#">Layouts</a>
 								<ul>
 									<li><a sec:authorize="isAnonymous()" th:href="@{/guidance}">절차안내</a></li>
-									<li><a href="right-sidebar.html">Right Sidebar</a></li>
-									<li><a href="no-sidebar.html">No Sidebar</a></li>
-									<li><a href="contact.html">Contact</a></li>
 								
 								</ul>
 							</li>
@@ -45,8 +43,8 @@
                         
                     
                            <ul>
-                           <li><a sec:authorize="isAuthenticated()" th:href=" @{/user/info}">내 정보</a></li>                          
-           <!--                 <li><a sec:authorize="isAuthenticated()" th:href="@{/user/createwill}">문서작성</a></li> -->
+                           <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href=" @{/user/info}">내 정보</a></li>
+                           <li><a sec:authorize="hasRole('ROLE_LAWYER')" th:href=" @{/lawyer/user/info}">내 정보</a></li>                         
  
                         </ul>   
                        

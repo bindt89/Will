@@ -21,7 +21,7 @@
 
 
 
-
+		<div sec:authorize="hasRole('ROLE_MEMBER')">
 		<form th:action="@{'/resignup/' + ${currentUser.no}}" method="get"  style='line-height:1em'>
 			
 			<li id="pag1"><input type="submit" value="회원정보 수정"
@@ -44,7 +44,32 @@
 				th:onclick="loction.herf=''"></li>&nbsp;
 		</form>
 		
+		</div>
 		
+		<div sec:authorize="hasRole('ROLE_LAWYER')">
+		<form th:action="@{'/lawyer/resignup/' + ${currentUser.no}}" method="get"  style='line-height:1em'>
+			
+			<li id="pag1"><input type="submit" value="회원정보 수정"
+				th:onclick="loction.herf='@{'/lawyer/resignup/update/' + ${currentUser.no}}'"></li>
+		</form>&nbsp;
+
+
+		<form th:action="@{'/lawyer/repass/' + ${currentUser.no}}" method="get" style='line-height:1em'>
+			<li id="pag1"><input type="submit" value="비밀번호 변경"
+				th:onclick="loction.herf=''"></li>&nbsp;
+		</form>
+		
+		<form th:action="@{/user/QnA/list}" method="get" style='line-height:1em'>
+		<li id="pag1"><input  type="submit" value="Q&A"
+				th:onclick="loction.herf=''"></li>&nbsp;
+		</form>
+		
+		<form th:action="@{/user/will/list}" method="get" style='line-height:1em'>
+		<li id="pag1"><input  type="submit" value="진행상황 보기"
+				th:onclick="loction.herf=''"></li>&nbsp;
+		</form>
+		
+		</div>
 		
 
 		<!--  <div class="w3-container" align="center">
@@ -68,9 +93,7 @@
 	
 	
 	
-</li>
-</ul>
-</li>
+
     
     
     
@@ -92,7 +115,7 @@
 </html>
 
 
-<li id="pag" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2431"><a title="개인정보 변경" href="http://localhost:8886/user/info2">개인정보 변경</a></li>
+<!-- <li id="pag" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2431"><a title="개인정보 변경" href="http://localhost:8886/user/info2">개인정보 변경</a></li>
 	<li id="pag" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2429"><a title="공증제도의 연혁" href="http://www.koreanotary.or.kr/?page_id=2378">공증제도의 연혁</a></li>
 	<li id="pag" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2428"><a title="공증인" href="http://www.koreanotary.or.kr/?page_id=2380">공증인</a></li>
-	<li id="pag" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-3612 current_page_item menu-item-has-children menu-item-3614"><a title="공증의 종류" href="http://www.koreanotary.or.kr/?page_id=3612">공증의 종류</a>
+	<li id="pag" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-3612 current_page_item menu-item-has-children menu-item-3614"><a title="공증의 종류" href="http://www.koreanotary.or.kr/?page_id=3612">공증의 종류</a> -->
