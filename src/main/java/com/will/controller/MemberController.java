@@ -51,12 +51,26 @@ public class MemberController {
     public String dispSignup2() {
         return "logintool/signup2";
     }
+    
+    // 변호사 회원가입 페이지
+    @GetMapping("/user/signup3")
+    public String dispSignup3() {
+        return "logintool/signup3";
+    }
 
     // 회원가입 처리
     @PostMapping("/user/signup")
     public String execSignup(MemberDto memberDto) {
-        memberService.joinUser(memberDto);
-
+    	if(memberDto.getProof() == null ) {
+    		memberDto.setProof("");
+    		memberDto.setUsertype("member");
+    	}
+    	else {
+    		memberDto.setUsertype("lawyer");
+    	}
+    	memberService.joinUser(memberDto);
+    	
+    	
         return "redirect:/user/login";
     }
 

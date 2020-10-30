@@ -22,8 +22,8 @@ package com.will.domain;
 
 	        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
-	        if(("admin").equals(memberEntity.getId())) {
-	            authorityList.add(new SimpleGrantedAuthority(Role.ADMIN.getValue()));
+	        if(("lawyer").equals(memberEntity.getUsertype())) {
+	            authorityList.add(new SimpleGrantedAuthority(Role.LAWYER.getValue()));
 	        } else {
 	            authorityList.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
 	        }

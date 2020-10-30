@@ -1,6 +1,5 @@
 package com.will.config;
 
-import com.will.service.LawyerService;
 import com.will.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
 	private MemberService memberService;
 	
-	private LawyerService lawyerService;
 	
 
     @Bean
@@ -59,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 
              // law 페이지 권한 설정
-                .antMatchers("/admin2/**").hasRole("ADMIN2")
                 .antMatchers("/myinfo4").hasRole("LAWYER")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
@@ -113,7 +110,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
-        auth.userDetailsService(lawyerService).passwordEncoder(passwordEncoder());
 	}
  
 }

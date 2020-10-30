@@ -19,6 +19,8 @@ public class MemberDto {
     private String gender;
     private String hp;
     private String addr;
+    private String proof;
+    private String usertype;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
     private boolean enabled = true;
@@ -36,13 +38,15 @@ public class MemberDto {
              .hp(hp)
              .enabled(enabled)
              .addr(addr)
+             .proof(proof)
+             .usertype(usertype)
                 .build();
        return memberEntity;
     }
 
     @Builder
     public MemberDto(Long no, String name,  String id, String password, 
-    		String email, String birthdate, String gender, String  hp, String addr 
+    		String email, String birthdate, String gender, String  hp, String addr,String proof, String usertype
     		,LocalDateTime createdDate, LocalDateTime modifiedDate, Boolean enabled) {
         this.no = no;
         this.name = name;
@@ -53,6 +57,8 @@ public class MemberDto {
         this.gender =  gender;
         this.hp = hp;
         this.addr = addr;
+        this.proof=proof;
+        this.usertype=usertype;
         this.createdDate = createdDate;
         this.modifiedDate =modifiedDate;
         this.enabled = enabled;
