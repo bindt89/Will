@@ -59,7 +59,7 @@ dependencies {
 	implementation 'org.web3j:solidity-gradle-plugin:0.1.6'
 	//implementation 'org.web3j:infura:4.0.3'
 	// implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
-
+	compile'org.springframework.security', name: 'spring-security-rsa', version: '1.0.8.RELEASE'
 
 }
 

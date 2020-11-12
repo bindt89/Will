@@ -8,6 +8,8 @@ import com.will.service.WillService;
 import com.will.util.MD5Generator;
 import com.will.domain.MemberDetail;
 import com.will.domain.entity.FileEntity;
+import com.will.domain.entity.WillEntity;
+
 import lombok.AllArgsConstructor;
 import com.will.service.FileService;
 
@@ -228,8 +230,11 @@ import java.util.List;
            return "will/choice";
        }
        
-     //전자서명 관련
-       
+     //전자서명 하기
+       @PostMapping("/will/sign")
+       public String willsign(Long willNo , Long userNo)  {
+    	   return WillService.encryptWill(willNo, userNo);
+       }
        
        
    }

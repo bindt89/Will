@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Will : 작성</title>
- <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
- <!-- <link rel="stylesheet" href="../src/main/resources/static/css/createwill.css"> --> 
+ <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'> 
+ 
+
 
 </head>
 <body>
@@ -52,12 +53,10 @@
         <div class="row">
             <div class="col-auto mr-auto"></div>
             <div class="col-auto">
-             <a class="submit1" th:href="@{will/list}" type="button" role="button" >목록</a>
+            <a  th:href="@{will/list}" class="animationbutton"  type="button" role="button" >목록</a>
                 <!--style=" height:54px; font-weight: bold; font-size:large; text-align:center;
                        width : 250px; background-color:#e8e8e8; border-color: gray; color:#545454;"-->
-            
-            
-             
+ 
                 <input class="submit2" type="submit" role="button" value="글쓰기">
              
             </div>
