@@ -21,7 +21,7 @@
             <label for="inputId" class="col-sm-2 col-form-label" style="" ><strong style=" font-size:large; color:#69A8AA; font-style:italic; font-weight: bold;"><u>아이디</u></strong></label>
 
             <div  class="col-sm-2">
-                <input type="text" name="id" class="form-control"  id="inputId" th:value="${#authentication.name}" readonly="readonly" >
+                <input type="text" name="memberId" class="form-control"  id="inputId" th:value="${#authentication.name}" readonly="readonly" >
                                                                                                                    
                  </div>
             </div>
@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-auto mr-auto"></div>
             <div class="col-auto">
-             <input class="submit1" th:href="@{/user/will/list}" type="submit" role="button" value="목록">
+             <a class="submit1" th:href="@{will/list}" type="button" role="button" >목록</a>
                 <!--style=" height:54px; font-weight: bold; font-size:large; text-align:center;
                        width : 250px; background-color:#e8e8e8; border-color: gray; color:#545454;"-->
             

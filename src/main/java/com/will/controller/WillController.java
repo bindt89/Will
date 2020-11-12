@@ -6,6 +6,7 @@ import com.will.dto.QnAFileDto;
 import com.will.dto.WillDto;
 import com.will.service.WillService;
 import com.will.util.MD5Generator;
+import com.will.domain.MemberDetail;
 import com.will.domain.entity.FileEntity;
 import lombok.AllArgsConstructor;
 import com.will.service.FileService;
@@ -15,6 +16,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,6 +33,7 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
    
 
@@ -44,58 +47,80 @@ import java.util.List;
    
       //유언장 리스트   
        @GetMapping("/user/will/list")
-       public String displist(Model model) {
+       public String displist(@AuthenticationPrincipal MemberDetail memberDetail, Model model) {
            List<WillDto> WillDtoList = WillService.getWillList();
-            model.addAttribute("WillList", WillDtoList);
+           List<WillDto> result = new ArrayList<WillDto>();
+           
+           for(int i=0;i<WillDtoList.size(); i++) {
+        	   if(WillDtoList.get(i).getMemberId().equals(memberDetail.getUsername())) {
+        		   result.add(WillDtoList.get(i));
+        	   }
+        	   else if(WillDtoList.get(i).getMemberId1() != null && WillDtoList.get(i).getLawyerId() !=null )
+        	   {
+        			   result.add(WillDtoList.get(i));
+			   } 
+    	   }
+           model.addAttribute("WillList", result);
            return "will/list";
        }
-    
+        
 
        //유언장 작성 페이지
        @GetMapping("/user/createwill")
        public String dispcreatewill() {
            return "will/createwill";
        }
+     
        //유언장 db입력
        @PostMapping("/user/createwill")
        public String createwill(@RequestParam("file") MultipartFile files, WillDto WillDto) {
            try {
-        	   if(!files.getOriginalFilename().isEmpty())
-        	   {
-	                String origFilename = files.getOriginalFilename();
-	                String filename = new MD5Generator(origFilename).toString();
-	                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-	                String savePath = System.getProperty("user.dir") + "\\files";
-	                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-	                if (!new File(savePath).exists()) {
-	                    try{
-	                        new File(savePath).mkdir();
-	                    }
-	                    catch(Exception e){
-	                        e.getStackTrace();
-	                    }
-	                }
-	                String filePath = savePath + "\\" + filename;
-	                files.transferTo(new File(filePath));
-	
-	                FileDto fileDto = new FileDto();
-	                fileDto.setOrigFilename(origFilename);
-	                fileDto.setFilename(filename);
-	                fileDto.setFilePath(filePath);
-	
-	                Long fileId = FileService.saveFile(fileDto);
-	                WillDto.setFileId(fileId);
-        	   }
-        	   
+              if(!files.getOriginalFilename().isEmpty())
+              {
+                   String origFilename = files.getOriginalFilename();
+                   String filename = new MD5Generator(origFilename).toString();
+                   /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+                   String savePath = System.getProperty("user.dir") + "\\files";
+                   /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+                   if (!new File(savePath).exists()) {
+                       try{
+                           new File(savePath).mkdir();
+                       }
+                       catch(Exception e){
+                           e.getStackTrace();
+                       }
+                   }
+                   String filePath = savePath + "\\" + filename;
+                   files.transferTo(new File(filePath));
+                   FileDto fileDto = new FileDto();
+                   fileDto.setOrigFilename(origFilename);
+                   fileDto.setFilename(filename);
+                   fileDto.setFilePath(filePath);
+                   Long fileId = FileService.saveFile(fileDto);
+                   WillDto.setFileId(fileId);
+              }
+               String Content = WillDto.getContent();
+               String hashcontent = new MD5Generator(Content).toString();
+               
+               WillDto.setHashcontent(hashcontent);
+              
+               
+               if(WillDto.getJinhang() == null)
+               {
+               WillDto.setJinhang("수정중");
+               }
+              
                 WillService.savePost(WillDto);
-            
-           
-           
+                
+                
+                
            } catch(Exception e) {
                 e.printStackTrace();
             }
            return "redirect:/user/will/list";
+           
        }
+       
        //디테일
        @GetMapping("/createwill/{no}")
        public String detail(@PathVariable("no") Long no, Model model) {
@@ -131,12 +156,46 @@ import java.util.List;
            model.addAttribute("file", FileDto);
            return "will/edit.html";
        }
-       //유언장 수정
+     //유언장 수정
        @PutMapping("/createwill/edit/{no}")
-       public String update(WillDto willDto) {
-           WillService.savePost(willDto);
+       public String update(@RequestParam("file") MultipartFile files, WillDto WillDto) {
+          try {
+              if(!files.getOriginalFilename().isEmpty())
+              {
+                   String origFilename = files.getOriginalFilename();
+                   String filename = new MD5Generator(origFilename).toString();
+                   /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
+                   String savePath = System.getProperty("user.dir") + "\\files";
+                   /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
+                   if (!new File(savePath).exists()) {
+                       try{
+                           new File(savePath).mkdir();
+                       }
+                       catch(Exception e){
+                           e.getStackTrace();
+                       }
+                   }
+                   String filePath = savePath + "\\" + filename;
+                   files.transferTo(new File(filePath));
+                   FileDto fileDto = new FileDto();
+                   fileDto.setOrigFilename(origFilename);
+                   fileDto.setFilename(filename);
+                   fileDto.setFilePath(filePath);
+                   Long fileId = FileService.saveFile(fileDto);
+                   WillDto.setFileId(fileId);
+              }
+               String Content = WillDto.getContent();
+               String hashcontent = new MD5Generator(Content).toString();
+               WillDto.setHashcontent(hashcontent);
+               
+                WillService.savePost(WillDto);   
+                
+           } catch(Exception e) {
+                e.printStackTrace();
+            }
            return "redirect:/user/will/list";
        }
+       
        //유언장 삭제
        @DeleteMapping("/createwill/{no}")
        public String delete(@PathVariable("no") Long no) {
@@ -168,5 +227,9 @@ import java.util.List;
        public String dispchoice() {
            return "will/choice";
        }
+       
+     //전자서명 관련
+       
+       
        
    }

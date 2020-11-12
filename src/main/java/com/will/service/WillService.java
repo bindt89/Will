@@ -31,12 +31,10 @@ public class WillService {
         for(WillEntity willEntity : WillList) {
             WillDto WillDto = com.will.dto.WillDto.builder()
             		.no(willEntity.getNo())
-                    .id(willEntity.getId())
+                    .memberId(willEntity.getMemberId())
                     .title(willEntity.getTitle())
                     .content(willEntity.getContent())
                     .createdDate(willEntity.getCreatedDate())
-                    
-                   
                     .build();
             WillDtoList.add(WillDto);
         }
@@ -48,12 +46,11 @@ public class WillService {
 
         WillDto WillDto = com.will.dto.WillDto.builder()
         		.no(willEntity.getNo())
-                .id(willEntity.getId())
+                .memberId(willEntity.getMemberId())
                 .title(willEntity.getTitle())
                 .content(willEntity.getContent())
                 .fileId(willEntity.getFileId())
                 .createdDate(willEntity.getCreatedDate())
-                
                 .build();
         return WillDto;
     }

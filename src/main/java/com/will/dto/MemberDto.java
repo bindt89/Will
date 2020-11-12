@@ -23,8 +23,11 @@ public class MemberDto {
     private String usertype;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
+    private String hasaddress;
     private boolean enabled = true;
 
+    
+    // has 어드레스 dto작성
 
     public MemberEntity toEntity() {
         MemberEntity memberEntity = MemberEntity.builder()
@@ -40,14 +43,15 @@ public class MemberDto {
              .addr(addr)
              .proof(proof)
              .usertype(usertype)
-                .build();
+             .hasaddress(hasaddress)
+             .build();
        return memberEntity;
     }
 
     @Builder
     public MemberDto(Long no, String name,  String id, String password, 
     		String email, String birthdate, String gender, String  hp, String addr,String proof, String usertype
-    		,LocalDateTime createdDate, LocalDateTime modifiedDate, Boolean enabled) {
+    		,LocalDateTime createdDate, LocalDateTime modifiedDate, String hasadderss, Boolean enabled) {
         this.no = no;
         this.name = name;
         this.id = id;
@@ -61,6 +65,7 @@ public class MemberDto {
         this.usertype=usertype;
         this.createdDate = createdDate;
         this.modifiedDate =modifiedDate;
+        this.hasaddress = hasadderss;
         this.enabled = enabled;
     }
 

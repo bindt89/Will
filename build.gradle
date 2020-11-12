@@ -51,10 +51,11 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     compile 'org.springframework.security.oauth:spring-security-oauth2:2.3.2.RELEASE'
-	compile("org.springframework.boot:spring-boot-starter-mail")
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	compile 'org.springframework:spring-context-support'
-    compile 'com.sun.mail:javax.mail'
-	compile ('org.web3j:core:3.6.0')
+  //  compile 'com.sun.mail:javax.mail'
+    compile 'org.springframework.boot:spring-boot-starter-mail'
+	compile 'org.web3j:core:4.2.0'
 	implementation 'org.web3j:solidity-gradle-plugin:0.1.6'
 	//implementation 'org.web3j:infura:4.0.3'
 	// implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'

@@ -21,65 +21,40 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
+
 	private MemberService memberService;
-	
-	
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
- }
- 
-    
- 
-   
-  
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Override
-    public void configure(WebSecurity web) throws Exception
-    {
-        // static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
-        web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/libs/**", "/sass/**",
-        		"/webfonts/**");
-    }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
+		web.ignoring().antMatchers("/css/**", "/js/**", "/images/**", "/libs/**", "/sass/**", "/webfonts/**");
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-        .antMatchers("/", "/oauth2/**","/image/**","/login/**", "/login2/**")
-		.permitAll()
-                // 페이지 권한 설정
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/myinfo2").hasRole("MEMBER")
-			
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                
-             // law 페이지 권한 설정
-                .antMatchers("/myinfo4").hasRole("LAWYER")
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-                .and() 
-                
-                .csrf()
-    			.ignoringAntMatchers("/check/findPw/sendEmail")
-    			.ignoringAntMatchers("/check/Pw")
-    			.ignoringAntMatchers("/check/Pw/changePw")
-    			.ignoringAntMatchers("/idCheck/sendEmail")
-    			.ignoringAntMatchers("/CertifiedCheck")
-                
-                
-                
-    			.and()// 로그인 설정
-               .formLogin()
-               .loginPage("/user/login")
-                .defaultSuccessUrl("/user/login/result")
-                .loginProcessingUrl("/user/login/result")
-               .permitAll()
-                .and() 
-        
-				
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/", "/oauth2/**", "/image/**", "/login/**", "/login2/**").permitAll()
+				// 페이지 권한 설정
+				.antMatchers("/admin/**").hasRole("ADMIN").antMatchers("/myinfo2").hasRole("MEMBER")
+
+				.antMatchers("/**").permitAll().anyRequest().authenticated()
+
+				// law 페이지 권한 설정
+				.antMatchers("/myinfo4").hasRole("LAWYER").antMatchers("/**").permitAll().anyRequest().authenticated()
+				.and()
+
+				.csrf().ignoringAntMatchers("/check/findPw/sendEmail").ignoringAntMatchers("/check/Pw")
+				.ignoringAntMatchers("/check/Pw/changePw").ignoringAntMatchers("/idCheck/sendEmail")
+				.ignoringAntMatchers("/CertifiedCheck")
+
+				.and()// 로그인 설정
+				.formLogin().loginPage("/user/login").defaultSuccessUrl("/user/login/result")
+				.loginProcessingUrl("/user/login/result").permitAll().and()
+
 //				  // 변호사 로그인 설정 
 //                .formLogin() 
 //                .loginPage("/user/login1")
@@ -87,29 +62,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //				 .loginProcessingUrl("/user/login/result1") 
 //				 .permitAll()
 //				 .and()
-				 
-                
-                // 로그아웃 설정
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-                .logoutSuccessUrl("/")
-                .invalidateHttpSession(true)
-                .and() 
-              
-            
-                // 403 예외처리 핸들링
-               .exceptionHandling().accessDeniedPage("/user/denied");
-        		//http.csrf().disable();
-        
-    }
-   
 
-               
+				// 로그아웃 설정
+				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")).logoutSuccessUrl("/")
+				.invalidateHttpSession(true).and()
 
+				// 403 예외처리 핸들링
+				.exceptionHandling().accessDeniedPage("/user/denied");
+		// http.csrf().disable();
+
+	}
 
 	@Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(memberService).passwordEncoder(passwordEncoder());
 	}
- 
+
 }

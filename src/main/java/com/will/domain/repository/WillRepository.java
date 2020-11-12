@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface WillRepository extends JpaRepository<WillEntity, Long> {
 	
-	Optional<MemberEntity> findById(String id);
+	Optional<MemberEntity> findByMemberId(String memid);
 }

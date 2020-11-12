@@ -39,6 +39,11 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 	@Modifying	// update , delete Query시 @Modifying 어노테이션을 추가
 	@Query(value="UPDATE MemberEntity me SET me.password = :password WHERE me.no = :no", nativeQuery=false)
 	void update(@Param("no") Long no, @Param("password") String password);
+	
+	@Transactional
+	@Modifying	
+	@Query(value="UPDATE MemberEntity me SET me.hasaddress = :hasaddress WHERE me.no = :no", nativeQuery=false)
+	void updateAddress(@Param("no") Long no, @Param("hasaddress") String hasaddress);
     
    
 	

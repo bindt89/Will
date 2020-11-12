@@ -28,7 +28,7 @@
                 <span th:text="${post.no}"></span>
             </th>
             <td>
-                <span th:text="${post.id}"></span>
+                <span th:text="${post.memberId}"></span>
             </td>
             <td>
                 <a th:href="@{'/createwill/' + ${post.no}}">
@@ -48,11 +48,10 @@
         </tr>
         </tbody>
     </table>
-    <th:block layout:fragment="paging"  >
-				<nav aria-label="Page navigation" class="text-left" >
-					<ul class="pagination" >
-						
-						<li class="text-center">
+    <th:block layout:fragment="paging">
+				<nav aria-label="Page navigation" class="text-center">
+					<ul class="pagination">
+						<li>
 							<a href="#" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
 							</a>
@@ -65,9 +64,8 @@
 						<li>
 							<a href="#" aria-label="Next">
 								<span aria-hidden="true">&raquo;</span>
-							</a><br><br>
-							
-    <div class="row" style="text-align: right;">
+							</a>
+    <div class="row">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
             <a class="btn btn-primary" th:href="@{/user/createwill}" role="button">글쓰기</a>

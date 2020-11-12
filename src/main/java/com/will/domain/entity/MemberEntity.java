@@ -58,6 +58,8 @@ public class MemberEntity extends TimeEntity {
     @Column(length = 100, nullable = false)
     private String usertype;
 
+    @Column
+    private String hasaddress;
 
     @Column
     private boolean enabled;
@@ -65,7 +67,7 @@ public class MemberEntity extends TimeEntity {
     @Builder
     public MemberEntity  (Long no, String name,  String id, String password,
     		String email, String birthdate, String gender ,String  hp, String addr
-    		,LocalDateTime createdDate ,boolean enabled , String proof, String usertype) {
+    		,LocalDateTime createdDate ,boolean enabled , String proof, String usertype ,String hasaddress) {
 
     
         this.no = no;
@@ -79,6 +81,7 @@ public class MemberEntity extends TimeEntity {
         this.addr = addr;
         this.proof= proof;
         this.usertype= usertype;
+        this.hasaddress = hasaddress;
         this.enabled = enabled;
     }
 

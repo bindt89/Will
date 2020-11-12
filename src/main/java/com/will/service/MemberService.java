@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.web3j.crypto.Credentials;
 
 import com.will.domain.MemberDetail;
 import com.will.domain.Role;
@@ -25,7 +26,11 @@ import com.will.domain.repository.MemberRepository;
 import com.will.dto.MemberDto;
 
 import lombok.AllArgsConstructor;
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.MnemonicUtils;
 
+
+import org.web3j.crypto.Bip32ECKeyPair;
 @Service
 @AllArgsConstructor
 public class MemberService implements UserDetailsService {
@@ -34,16 +39,37 @@ public class MemberService implements UserDetailsService {
 		private MemberRepository memberRepository;
 	  private   CertifiedRepository certifiedRepository;
 
-    @Transactional
-    public Long joinUser(MemberDto memberDto) {
-        // 비밀번호 암호화
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+	
+	public String getUserAddress(Long userNum) {
+		String mnemonic = "among adult sock culture steel dream deer dutch pass length vehicle dial";
+		Bip32ECKeyPair masterKeypair = Bip32ECKeyPair.generateKeyPair(MnemonicUtils.generateSeed(mnemonic, null));
+		int[] derivationPath_user = {44 | Bip32ECKeyPair.HARDENED_BIT, 60 | Bip32ECKeyPair.HARDENED_BIT, 0 | Bip32ECKeyPair.HARDENED_BIT, 0,userNum.intValue()};
+		Bip32ECKeyPair  userKeyPair = Bip32ECKeyPair.deriveKeyPair(masterKeypair, derivationPath_user);
+		Credentials credentials = Credentials.create(userKeyPair);
+		
+		return credentials.getAddress();
+	}
 
-        return memberRepository.save(memberDto.toEntity()).getNo();
-    }
-    
-    @Override
+	
+	  
+	
+	  @Transactional public Long joinUser(MemberDto memberDto) { // 비밀번호 암호화
+	  BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+	  memberDto.setPassword(passwordEncoder.encode(memberDto.getPassword()));
+	  memberDto.setHasaddress("");
+	  
+	  Long userNumber = memberRepository.save(memberDto.toEntity()).getNo(); 
+	  String userAddress = getUserAddress(userNumber);
+	  memberRepository.updateAddress(userNumber, userAddress);
+	  
+	  return userNumber;
+	  
+	  
+	  }
+	 
+
+
+	@Override
     public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 
     	MemberEntity memberEntity = memberRepository.findMemberEntityById(id);

@@ -22,17 +22,29 @@ public class WillEntity extends TimeEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long no;
 
-    @Column(length = 10, nullable = false)
-    private String id;
-
     @Column(length = 100, nullable = false)
     private String title;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+    
+    @Column(length = 100, nullable = false)
+    private String hashcontent;
+    
+    @Column(length = 100, nullable = false)
+    private String jinhang;
+    
+    @Column
+    private String memberId;
+    
+    @Column
+    private String lawyerId;
 
     @Column
     private Long fileId;
+    
+    @Column
+    private String member1;
 
     @CreatedDate
     @Column(updatable = false)
@@ -44,11 +56,15 @@ public class WillEntity extends TimeEntity {
   
 
     @Builder
-    public WillEntity(Long no, String id , String title, String content, Long fileId) {
+    public WillEntity(Long no, String memberId , String member1, String title, String content, String hashcontent , String lawyerId , String jinhang , Long fileId) {
     	this.no = no;
-        this.id = id;
+        this.memberId = memberId;
         this.title = title;
         this.content = content;
+        this.hashcontent = hashcontent;
+        this.lawyerId = lawyerId;
+        this.jinhang = jinhang;
         this.fileId = fileId;
+        this.member1 = member1;
     }
 }

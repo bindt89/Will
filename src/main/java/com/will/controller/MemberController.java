@@ -5,15 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.will.domain.MemberDetail;
 import com.will.domain.entity.MemberEntity;
@@ -97,12 +102,13 @@ public class MemberController {
     // 비밀번호 찾기 페이지
     @GetMapping("/searchpass") 
     public String searchPass() {
-        return "login/searchPass";
+        return "logintool/searchPass";
     }
 
     // 접근 거부 페이지
     @GetMapping("/user/denied")
     public String dispDenied() {
+    	
         return "/denied";
     }
 
@@ -164,25 +170,22 @@ public class MemberController {
     	}
     }
     
-    //새로 입력한 password로 사용자의 password를 변경하는 컨트롤러
-    @PostMapping("/check/Pw/changPw")
-    @ResponseBody
-    public void changPw(String newpw, String id) {
-    	memberService.updatePassword(newpw, id);
+  //새로 입력한 password로 사용자의 password를 변경하는 컨트롤러
+    @RequestMapping(value="/check/Pw/changPw",method = RequestMethod.POST)  
+    public String loginResult(HttpServletRequest req,HttpServletResponse res, Model model){
+	    String newpw = req.getParameter("newpw");
+	    String id = req.getParameter("id");
+	    memberService.updatePassword(newpw, id);
+    	return "redirect:/user/logout";
     }
     
     //현재 사용자 정보변경 처리
     @PostMapping("/resignup/update/{no}")
     public String update(MemberDto memberDto) {
     	   memberService.savePost(memberDto);
-    	
     	return "redirect:/user/info";
     }
-    
-  
-    
-   
-
+ 
     //Email과 name의 일치여부를 check하는 컨트롤러
     @GetMapping("/check/findPw")
        public @ResponseBody Map<String, Boolean> pw_find(String email, String name){
