@@ -12,7 +12,7 @@
     <table class="table"><br><br>
         <thead class="thead-light">
         <tr class="text-center">
-            <th scope="col">no</th>
+            <th scope="col">글번호</th>
             <th scope="col">아이디</th>
             <th scope="col">제목</th>
             <th scope="col">진행상태</th>
@@ -36,35 +36,22 @@
                 </a>
             </td>
            <td>
-                <span th:text="작성중"></span>
+                <span th:text="${post.jinhang}"></span>
             </td>
-           
             <td>
                 <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
             </td>
             <td>
-            <a class="btn btn-dark" th:href="@{/user/choice}" role="button">변호사지정</a>
+            <a class="btn btn-dark " th:href="@{'/user/choice/' + ${post.no}}" role="button">변호사지정</a>
             <td>
         </tr>
         </tbody>
     </table>
-    <th:block layout:fragment="paging">
-				<nav aria-label="Page navigation" class="text-left">
-					<ul class="pagination">
-						<li>
-							<a href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li>
-							<a href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							</a>
+    <div>
+    <span th:each="pageNum : ${pageList}" th:inline="text">
+    	<a th:href="@{'/user/will/list?page=' + ${pageNum}}">[[${pageNum}]]</a>
+    </span>
+    </div>
     <div class="row">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">

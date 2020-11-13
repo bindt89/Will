@@ -27,6 +27,8 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 
 	
 	  MemberEntity findById(String id);
+	  
+	  MemberEntity findByNo(Long no);
 	    
 	    MemberEntity findMemberEntityById(Long no);
 		
@@ -40,10 +42,10 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
 	@Query(value="UPDATE MemberEntity me SET me.password = :password WHERE me.no = :no", nativeQuery=false)
 	void update(@Param("no") Long no, @Param("password") String password);
 	
-	@Transactional
-	@Modifying	
-	@Query(value="UPDATE MemberEntity me SET me.hasaddress = :hasaddress WHERE me.no = :no", nativeQuery=false)
-	void updateAddress(@Param("no") Long no, @Param("hasaddress") String hasaddress);
+    @Transactional
+    @Modifying    
+    @Query(value="UPDATE MemberEntity me SET me.hasaddress = :hasaddress WHERE me.no = :no", nativeQuery=false)
+    void updateAddress(@Param("no") Long no, @Param("hasaddress") String hasaddress);
     
    
 	

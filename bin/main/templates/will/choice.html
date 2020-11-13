@@ -1,13 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>변호사 선택</title>
+    <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+    <style type="text/css">
+    .modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 900px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}</style>
 </head>
 <body>
 <header th:insert="com/header.html"></header>
-<br><br><br>
-<h1>변호사 선택창</h1>
-<footer th:insert="com/footer.html"></footer>
+<br>
+<div class="container">
+    <table class="table"><br><br>
+        <thead class="thead-light">
+        <tr class="text-center">
+            <th scope="col">no</th>
+            <th scope="col">아이디</th>
+            <th scope="col">이름</th>
+            <th scope="col">생년월일</th>
+            <th scope="col">주소</th>
+            <th scope="col">변호사 지정</th>
+        </tr>
+        </thead>
+        
+        
+        <tbody>
+        <h1>변호사 선택</h1>
+        <tr  class="text-center" th:if="${not #lists.isEmpty( LawyerList )}" th:each="post : ${LawyerList}">
+        	<th scope="row" >
+                <span th:text="${post.no}"></span>
+            </th>
+            <td>
+                <span th:text="${post.id}"></span>
+            </td>
+            <td>
+            	<span th:text="${post.name}"></span><br>
+                <div class="bottom"> 
+	        		<a class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal" >
+	              		[상세보기]
+        			</a>
+				</div> 
+
+<!-- Modal --> 
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> 
+       			<div class="modal-dialog modal-lg"> 
+                <div class="modal-content"> 
+                  
+                 	<div class="modal-body"> 	
+                                
+     <table cellspacing="0" cellpadding="0" summary="기본정보 입력양식입니다." class="board-write ">
+        <colgroup>
+        	<col width="40%">
+       		<col width="%">
+        		</colgroup>
+        			<tbody>
+         	<h4 class="modal-title" id="myModalLabel">상세정보</h4> 
+         	<br>
+          		<tr>
+            		<th scope="row">성명 </th>
+            			<td><span th:text="${post.name}"></span></td>
+          		</tr>
+		 		<tr>
+            		<th scope="row">생년월일</th>
+            			<td><span th:text="${post.birthdate}"></span></td>
+          		</tr>
+
+          		<tr>
+            		<th scope="row">소속회</th>
+            			<td>서울</td>
+         		</tr>
+
+          		<tr>
+            		<th scope="row">자격시험</th>
+            			<td>변호사시험 9회</td>
+          		</tr>
+
+          		<tr>
+            		<th scope="row">사무소명</th>
+            			<td>법무법인(유한) 화우</td>
+          		</tr>
+          		<tr>
+            		<th scope="row">연락처</th>
+
+            			<td><span th:text="${post.hp}"></span></td>
+            	</tr>   
+          		<tr>
+            		<th scope="row">주소</th>
+            			<td><span th:text="${post.addr}"></span></td>
+
+          		</tr>
+          		<tr>
+            		<th scope="row">이메일</th>
+            			<td> <span th:text="${post.email}"></span></td>
+          		</tr>
+
+        	</tbody>
+      		</table>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+                </div> 
+                </div> 
+       			</div> 
+				</div>
+            </td>
+            <td>
+                <span th:text="${post.birthdate}"></span>
+            </td>
+            <td>
+                <span th:text="${post.addr}"></span>
+            </td>
+          	<td>
+          		<form th:action="@{'/will/choice/' + ${post.no}}" method="post">
+          			<input type="hidden" name="no" value=getWillNo()>
+          		   	
+            	<button type="submit" class="btn btn-dark " role="button" style="width: 20px">지정</button>
+            </form>
+            </td>
+        </tr>
+        </tbody>
+    		</table>
+    			<div>
+    				<span th:each="pageNum : ${pageList}" th:inline="text">
+    					<a th:href="@{'/user/will/list?page=' + ${pageNum}}">[[${pageNum}]]</a>
+    				</span>
+    			</div>
+		</div>
+
+			<footer th:insert="com/footer.html"></footer>
+		<script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+		<script src="/webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+var willNo = window.location.href.split('/')[5]
+$('input[name=no]').each(function(index,item){
+	item.value = willNo
+})
+
+</script>
 </html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+    <style type="text/css">
+    .modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 900px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}</style>
+</head>
+<body>
+
+<!-- Modal --> 
+
+
+         <h4 class="modal-title" id="myModalLabel">상세정보</h4> 
+         <br>
+          <tr>
+            <th scope="row">성명 </th>
+            <td><span th:text="${post.name}"></span></td>
+          </tr>
+		  <tr>
+            <th scope="row">생년월일</th>
+            <td><span th:text="${post.birthdate}"></span></td>
+          </tr>
+
+          <tr>
+            <th scope="row">소속회</th>
+            <td>서울</td>
+          </tr>
+
+          <tr>
+            <th scope="row">자격시험</th>
+            <td>변호사시험 9회</td>
+          </tr>
+
+          <tr>
+            <th scope="row">사무소명</th>
+            <td>법무법인(유한) 화우</td>
+          </tr>
+          <tr>
+            <th scope="row">연락처</th>
+
+            <td><span th:text="${post.hp}"></span></td>
+
+          </tr>   
+          <tr>
+            <th scope="row">주소</th>
+
+            <td><span th:text="${post.addr}"></span></td>
+
+          </tr>
+          <tr>
+            <th scope="row">이메일</th>
+            <td> <span th:text="${post.email}"></span></td>
+          </tr>
+
+        
+
+</body>
+</html>

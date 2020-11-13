@@ -4,28 +4,28 @@ package com.will.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.will.domain.MemberDetail;
 import com.will.domain.entity.MemberEntity;
 import com.will.domain.repository.MemberRepository;
 import com.will.dto.CertifiednumberDto;
+import com.will.dto.FileDto;
 import com.will.dto.MailDto;
 import com.will.dto.MemberDto;
+import com.will.dto.WillDto;
 import com.will.service.MemberService;
 import com.will.service.SendEmailService;
 
@@ -108,7 +108,6 @@ public class MemberController {
     // 접근 거부 페이지
     @GetMapping("/user/denied")
     public String dispDenied() {
-    	
         return "/denied";
     }
 
@@ -170,22 +169,30 @@ public class MemberController {
     	}
     }
     
-  //새로 입력한 password로 사용자의 password를 변경하는 컨트롤러
+    //새로 입력한 password로 사용자의 password를 변경하는 컨트롤러
     @RequestMapping(value="/check/Pw/changPw",method = RequestMethod.POST)  
     public String loginResult(HttpServletRequest req,HttpServletResponse res, Model model){
-	    String newpw = req.getParameter("newpw");
-	    String id = req.getParameter("id");
-	    memberService.updatePassword(newpw, id);
-    	return "redirect:/user/logout";
+        String newpw = req.getParameter("newpw");
+        String id = req.getParameter("id");
+        memberService.updatePassword(newpw, id);
+        return "redirect:/user/logout";
     }
     
     //현재 사용자 정보변경 처리
     @PostMapping("/resignup/update/{no}")
     public String update(MemberDto memberDto) {
+    	if(memberDto.getProof() == null ) {
+    		memberDto.setProof("");
+    	}
     	   memberService.savePost(memberDto);
+    	
     	return "redirect:/user/info";
     }
- 
+    
+  
+    
+   
+
     //Email과 name의 일치여부를 check하는 컨트롤러
     @GetMapping("/check/findPw")
        public @ResponseBody Map<String, Boolean> pw_find(String email, String name){
@@ -249,5 +256,23 @@ public class MemberController {
         //4. DB에 저장한다.
         //sendEmailService.saveNumber(email, number);
     }
+    
+//  // 변호사 상세정보
+//    @GetMapping("/lawyer/{no}")
+//    public String detail(@PathVariable("no") Long no, Model model) {
+//        WillDto willDto = MemberService.getPost(no);
+//        FileDto FileDto;
+//        
+// 	   try {
+// 		   long id = willDto.getFileId();
+// 		   FileDto = FileService.getFile(id);
+// 	   }
+// 	   catch(Exception e) {
+// 		   FileDto= new FileDto((long) 0,"파일없음","파일없음","");
+// 	   }
+//        model.addAttribute("post", willDto);
+//        model.addAttribute("file", FileDto);
+//        return "will/detail";
+//    }
     
 }
