@@ -44,7 +44,7 @@ public class WillEntity extends TimeEntity {
     private Long fileId;
     
     @Column
-    private String member1;
+    private String memberId1;
 
     @CreatedDate
     @Column(updatable = false)
@@ -52,11 +52,9 @@ public class WillEntity extends TimeEntity {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
-
-  
-
+    
     @Builder
-    public WillEntity(Long no, String memberId , String member1, String title, String content, String hashcontent , String lawyerId , String jinhang , Long fileId) {
+    public WillEntity(Long no, String memberId , String memberId1, String title, String content, String hashcontent , String lawyerId , String jinhang , Long fileId) {
     	this.no = no;
         this.memberId = memberId;
         this.title = title;
@@ -65,6 +63,6 @@ public class WillEntity extends TimeEntity {
         this.lawyerId = lawyerId;
         this.jinhang = jinhang;
         this.fileId = fileId;
-        this.member1 = member1;
+        this.memberId1 = memberId1;
     }
 }

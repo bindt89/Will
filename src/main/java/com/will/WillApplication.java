@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
+
 @EnableJpaAuditing
 @SpringBootApplication
 public class WillApplication {
@@ -15,9 +16,12 @@ public class WillApplication {
 		SpringApplication.run(WillApplication.class, args);
 	}
 
-	@Bean
-	public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-		return new HiddenHttpMethodFilter();
-	}
+  @Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+   }
 
+  
+  
+  
 }

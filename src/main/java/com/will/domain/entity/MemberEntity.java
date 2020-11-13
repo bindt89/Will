@@ -60,16 +60,14 @@ public class MemberEntity extends TimeEntity {
 
     @Column
     private String hasaddress;
-
+    
     @Column
     private boolean enabled;
     
     @Builder
     public MemberEntity  (Long no, String name,  String id, String password,
     		String email, String birthdate, String gender ,String  hp, String addr
-    		,LocalDateTime createdDate ,boolean enabled , String proof, String usertype ,String hasaddress) {
-
-    
+            ,LocalDateTime createdDate ,boolean enabled , String proof, String usertype ,String hasaddress) {
         this.no = no;
         this.name = name;
         this.id = id;

@@ -28,7 +28,6 @@ public class MemberDto {
 
     
     // has 어드레스 dto작성
-
     public MemberEntity toEntity() {
         MemberEntity memberEntity = MemberEntity.builder()
              .no(no)
@@ -51,7 +50,7 @@ public class MemberDto {
     @Builder
     public MemberDto(Long no, String name,  String id, String password, 
     		String email, String birthdate, String gender, String  hp, String addr,String proof, String usertype
-    		,LocalDateTime createdDate, LocalDateTime modifiedDate, String hasadderss, Boolean enabled) {
+            ,LocalDateTime createdDate, LocalDateTime modifiedDate, String hasadderss, Boolean enabled) {
         this.no = no;
         this.name = name;
         this.id = id;

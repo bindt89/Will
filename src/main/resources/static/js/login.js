@@ -29,4 +29,3 @@ $(".login-form").validate({
     }
   }
 });
-

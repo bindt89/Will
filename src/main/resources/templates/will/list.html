@@ -23,7 +23,6 @@
         <h1>진행중인건</h1>
         <tbody>
         <tr  class="text-center" th:if="${not #lists.isEmpty( WillList )}" th:each="post : ${WillList}">
-        
             <th scope="row" >
                 <span th:text="${post.no}"></span>
             </th>

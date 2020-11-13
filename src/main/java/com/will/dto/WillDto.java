@@ -1,4 +1,5 @@
 package com.will.dto;
+
 import com.will.domain.entity.WillEntity;
 import com.will.domain.repository.MemberRepository;
 
@@ -26,9 +27,9 @@ public class WillDto {
     private LocalDateTime modifiedDate;
 
     public WillEntity toEntity() {
-       
-       WillEntity willentity = WillEntity.builder()
-             .no(no)
+    	
+    	WillEntity willentity = WillEntity.builder()
+    			.no(no)
                 .memberId(memberId)
                 .title(title)
                 .content(content)
@@ -36,7 +37,7 @@ public class WillDto {
                 .lawyerId(lawyerId)
                 .jinhang(jinhang)
                 .fileId(fileId)
-                .memberId(memberId1)
+                .memberId1(memberId1)
                 .build();
         return willentity;
     }
