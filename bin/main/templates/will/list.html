@@ -17,12 +17,14 @@
             <th scope="col">제목</th>
             <th scope="col">진행상태</th>
             <th scope="col">작성일</th>
-            <th scope="col">공증인</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_MEMBER')">공증인</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_LAWYER')">수정</th>
         </tr>
         </thead>
-        <h1>진행중인건</h1>
+        <h1 sec:authorize="hasRole('ROLE_MEMBER')">진행중인건</h1>
+        <h1 sec:authorize="hasRole('ROLE_LAWYER')">진행중인건</h1>
         <tbody>
-        <tr  class="text-center" th:if="${not #lists.isEmpty( WillList )}" th:each="post : ${WillList}">
+        <tr  class="text-center" th:if="${not #lists.isEmpty( WillList )}" th:each="post : ${WillList}" >
             <th scope="row" >
                 <span th:text="${post.no}"></span>
             </th>
@@ -40,21 +42,39 @@
             <td>
                 <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
             </td>
-            <td>
-            <a class="btn btn-dark " th:href="@{'/user/choice/' + ${post.no}}" role="button">변호사지정</a>
+            <td> 
+            <a class="btn btn-dark " th:href="@{'/user/choice/' + ${post.no}}" role="button" sec:authorize="hasRole('ROLE_MEMBER')" th:if="${post.lawyerId} == null">변호사지정</a>
+            <a sec:authorize="hasRole('ROLE_MEMBER')" th:if="${post.lawyerId} != null">[[${post.lawyerId}]]</a>
+            <a class="btn btn-dark " th:href="@{'/createwill/edit/' + ${post.no}}" role="button" sec:authorize="hasRole('ROLE_LAWYER')">수정</a>
             <td>
         </tr>
         </tbody>
     </table>
-    <div>
-    <span th:each="pageNum : ${pageList}" th:inline="text">
-    	<a th:href="@{'/user/will/list?page=' + ${pageNum}}">[[${pageNum}]]</a>
-    </span>
-    </div>
+     <th:block layout:fragment="paging">
+            <nav aria-label="Page navigation" class="text-left">
+               <ul class="pagination justify-content-center">
+                  <li>
+                     <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                     </a>
+                  </li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li>
+                     <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                     </a>
+                     </li>
+                     </ul>
+                     </nav>
+                     </th:block>
     <div class="row">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
-            <a class="btn btn-primary" th:href="@{/user/createwill}" role="button">글쓰기</a>
+            <a class="btn btn-primary" th:href="@{/user/createwill}" role="button" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a><br><br>
         </div>
     </div>
 </div>

@@ -1,57 +1,69 @@
 @charset "UTF-8";
 
-@import url("fontawesome-all.min.css");
-.head {
-        ont-family:'Google Sans',Roboto,Arial,sans-serif;
-    font-size:1.75rem;
-    font-weight:400;
-    letter-spacing:0;
-    line-height:2.25rem;
-    hyphens:auto;
-    word-break:break-word;
-    word-wrap:break-word;
-    color:#202124;
-    margin:0 0 8px 0;
-    padding:0;
+/* .head{
+	
+	ont-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 2.25rem;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    color: #202124;
+    margin: 0 0 8px 0;
+    padding: 0;
     text-align: center;
 }
+ */
+ .myinfomypage{
+	font-size:X-large;
+	text-align: center;
+	color:#757575;
+	text-decoration: underline;
+	text-underline-position: under;
+	margin-bottom:50px;
+	margin-top:70px;
+    font-size:30pt;
+    content-box:100px;
+}
+.animationbutton{
+  background:#80cbc4;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  margin-left:40%;
+  width:300px;
+  font-weight:bolder;
 
-    @media screen and (max-width:1680px) {
-            .container {
-                    width:1200px;
-    }
-                .container.medium {
-                        width:900px;
-    }
 }
-    @media screen and (max-width:1280px) {
-            .container {
-                    width:960px;
-    }
-                .container.medium {
-                        width:735px;
-    }
+.animationbutton:hover{
+  background:#fff;
+  color:#1AAB8A;
 }
-    @media screen and (max-width:980px) {
-            .container {
-                    width:95%;
-    }
-                .container.medium {
-                        width:71.25%;
-    }
+.animationbutton:before,.animationbutton:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
 }
-    @media screen and (max-width:840px) {
-            .container {
-                    width:95%;
-    }
-                .container.medium {
-                        width:95%;
-    }
-        @media screen and (max-width:736px) {
-            .container {
-                    width:100%;
-    }
-                .container.medium {
-                        width: 100%;
-    }
+.animationbutton:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.animationbutton:hover:before,.animationbutton:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }

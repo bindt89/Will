@@ -78,8 +78,6 @@ public class MemberController {
     	
         return "redirect:/user/login";
     }
-
-    
     
     // 로그인 페이지
     @GetMapping("/user/login")
@@ -121,17 +119,11 @@ public class MemberController {
     	
     }
     
-   
-
-
     // 어드민 페이지
     @GetMapping("/admin")
     public String Admin() {
         return "/admin";
     }
- 
-  
-
     
     //현재 사용자 정보변경 페이지
     @GetMapping("/resignup/{no}")
@@ -143,7 +135,6 @@ public class MemberController {
         return "info/myinfo2";
     }
     
-     
     //현재 사용자 비밀번호변경 페이지
     @GetMapping("/repass/{no}")
     public String repass(@AuthenticationPrincipal  MemberDetail memberDetail, Model model) {
@@ -185,7 +176,6 @@ public class MemberController {
     		memberDto.setProof("");
     	}
     	   memberService.savePost(memberDto);
-    	
     	return "redirect:/user/info";
     }
     

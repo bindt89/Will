@@ -8,28 +8,32 @@
 <body>
 <header th:insert="com/header.html"></header>
 <br><br><br>
-
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title" th:text="@{${post.title} + ' - ' + ${post.id}}"></h5>
-            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></small></p>
+        	<h4 style="color: black;"><strong>제목</strong></h4>
+            <h5 class="card-title" th:text="${post.title}"></h5>
+            <h4 style="color: black;"><strong>내용</strong></h4>
             <p class="card-text" th:text="${post.content}"></p>
             <div>
                 <strong>첨부파일 : </strong>
-                <a class="card-text" th:href="@{'/QnAdownload/' + ${post.fileId}}" th:text="${file.origFilename}"></a>
+                <a class="card-text" th:href="@{'/QnAdownload/' + ${post.fileId}}" th:text="${file.origFilename}"></a><br><br>
             </div>
+            <h4 style="color: black; float: left;"><strong>아이디:</strong></h4>
+            <h5 class="card-title" th:text="${post.id}" style="float: left;"></h5>
+            <h4 style="color: black; float: left;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일:</strong></h4>
+            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}" ></small></p>
         </div>
     </div>
     <div class="row mt-3">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
-            <a class="btn btn-info" th:href="@{'/write/edit/' + ${post.no}}" role="button">수정</a>
+            <a class="btn btn-info" th:href="@{'/write/edit/' + ${post.no}}" role="button" sec:authorize="hasRole('ROLE_MEMBER')">수정</a>
         </div>
         <div class="col-auto">
             <form id="delete-form" th:action="@{'/write/' + ${post.no}}" method="post">
                 <input type="hidden" name="_method" value="delete"/>
-                <button id="delete-btn" type="submit" class="btn btn-danger">삭제</button>
+                <button id="delete-btn" type="submit" class="btn btn-danger" sec:authorize="hasRole('ROLE_MEMBER')">삭제</button>
                 
                
             </form>

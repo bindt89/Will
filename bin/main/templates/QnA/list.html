@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>유언장 - 목록</title>
+    <title>QnA - 목록</title>
     <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
 </head>
 <body>
@@ -16,32 +16,52 @@
             <th scope="col">아이디</th>
             <th scope="col">제목</th>
             <th scope="col">작성일</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_LAWYER')"></th>
         </tr>
         </thead>
-        <tbody>
-        <tr class="text-center" th:each="post : ${QnAList}"[]>
-            <th scope="row">
-                <span th:text="${post.no}"></span>
-            </th>
-            <td>
-                <span th:text="${post.id}"></span>
-            </td>
-            <td>
-                <a th:href="@{'/write/' + ${post.no}}">
-                    <span th:text="${post.title}"></span>
-                </a>
-            </td>
-           
-            <td>
-                <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
-            </td>
-        </tr>
-        </tbody>
+        <!-- QnA -->
+        <tbody th:each="post : ${QnAList}">
+	        <tr class="text-center"  style="font-size: 20px;">
+	            <th scope="row">
+	                <span th:text="${post.no}"></span>
+	            </th>
+	            <td>
+	                <span th:text="${post.id}"></span>
+	            </td>
+	            <td>
+	                <a th:href="@{'/write/' + ${post.no}}">
+	                    <span th:text="${post.title}"></span>
+	                </a>
+	            </td>
+	            <td>
+	                <span th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+	            </td>
+	            <td>
+	                <a class="btn btn-dark " th:href="@{'/QnA/reply/' + ${post.no}}" role="button" sec:authorize="hasRole('ROLE_LAWYER')">답변하기</a>
+	            </td>
+	        </tr>
+	        <tr class="text-center" th:each="reply : ${ReplyList}"  th:object="${reply}" th:if="${reply.qnano} == ${post.no}" style="color: gray; font-size: 18px;">
+		        <th scope="row"></th>
+	            <td>
+	                <span th:text="'↳'"></span>
+	            </td>
+	            <td>
+	                <a th:href="@{'/reply/' + ${reply.no}}">
+	                    <span th:text="${reply.title}"></span>
+	                </a>
+	            </td>
+	            <td>
+	                <span th:text="${#temporals.format(reply.createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+	            </td>
+        	</tr>
+        	</tbody>
+        <!-- reply -->
+        
     </table>
     <div class="row">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto">
-            <a class="btn btn-primary" th:href="@{/user/write}" role="button">글쓰기</a>
+            <a class="btn btn-primary" th:href="@{/user/write}" role="button" sec:authorize="hasRole('ROLE_MEMBER')">글쓰기</a>
         </div>
     </div>
 </div>

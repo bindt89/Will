@@ -34,7 +34,7 @@ public class MemberEntity extends TimeEntity {
     @Column(length = 100, nullable = false)
     private String id;
     
-    @Column(length = 100, nullable = false)
+    @Column(length = 200, nullable = false)
     private String password;
 
     @Column(length = 100, nullable = false)

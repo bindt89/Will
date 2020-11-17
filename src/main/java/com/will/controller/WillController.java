@@ -7,6 +7,7 @@ import com.will.dto.QnAFileDto;
 import com.will.dto.WillDto;
 import com.will.service.WillService;
 import com.will.util.MD5Generator;
+import com.will.domain.MemberDetail;
 import com.will.domain.entity.FileEntity;
 import com.will.domain.entity.MemberEntity;
 import com.will.domain.repository.MemberRepository;
@@ -20,6 +21,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,6 +38,7 @@ import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
@@ -50,18 +53,25 @@ import javax.security.auth.message.callback.PrivateKeyCallback.Request;
       private FileService fileService;
 
    
+      
       //유언장 리스트   
-       @GetMapping("/user/will/list")
-       public String displist(Model model,@RequestParam(value = "page" , defaultValue="1")Integer pageNum) {
-           List<WillDto> WillDtoList = willService.getWillList(pageNum);
-           Integer[] pageList = willService.getPageList(pageNum);
-           
-            model.addAttribute("WillList", WillDtoList);
-            model.addAttribute("pageList", pageList);
-            
-           return "will/list";
-       }
-
+      @GetMapping("/user/will/list")
+      public String displist(@AuthenticationPrincipal MemberDetail memberDetail, Model model) {
+          List<WillDto> WillDtoList = willService.getWillList();
+          List<WillDto> result = new ArrayList<WillDto>();
+          
+          for(int i=0;i<WillDtoList.size(); i++) {
+             if(WillDtoList.get(i).getMemberId().equals(memberDetail.getUsername())) {
+                result.add(WillDtoList.get(i));
+             }
+             else if(WillDtoList.get(i).getMemberId1() != null && WillDtoList.get(i).getLawyerId() !=null )
+             {
+                   result.add(WillDtoList.get(i));
+           } 
+         }
+          model.addAttribute("WillList", result);
+          return "will/list";
+      }
        //유언장 작성 페이지
        @GetMapping("/user/createwill")
        public String dispcreatewill() {
@@ -97,19 +107,12 @@ import javax.security.auth.message.callback.PrivateKeyCallback.Request;
         	   }
         	    String Content = WillDto.getContent();
         	    String hashcontent = new MD5Generator(Content).toString();
-        	    
         	    WillDto.setHashcontent(hashcontent);
-        	   
-        	    
         	    if(WillDto.getJinhang() == null)
         	    {
         	    WillDto.setJinhang("수정중");
         	    }
-         	  
-                WillService.savePost(WillDto);
-                
-                
-                
+                WillService.savePost(WillDto);   
            } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -153,7 +156,7 @@ import javax.security.auth.message.callback.PrivateKeyCallback.Request;
            return "will/edit.html";
        }
        //유언장 수정
-       @PutMapping("/createwill/edit/{no}")
+       @PostMapping("/createwill/edit/{no}")
        public String update(@RequestParam("file") MultipartFile files, WillDto WillDto) {
     	   try {
         	   if(!files.getOriginalFilename().isEmpty())
@@ -183,6 +186,9 @@ import javax.security.auth.message.callback.PrivateKeyCallback.Request;
         	    String Content = WillDto.getContent();
         	    String hashcontent = new MD5Generator(Content).toString();
         	    WillDto.setHashcontent(hashcontent);
+        	    if(WillDto.getJinhang() == null) {
+        	    	WillDto.setJinhang("수정중");
+        	    }
                 WillService.savePost(WillDto);   
            } catch(Exception e) {
                 e.printStackTrace();
@@ -246,5 +252,10 @@ import javax.security.auth.message.callback.PrivateKeyCallback.Request;
     	return "redirect:/user/will/list";
        }
        
+       //전자서명 하기
+       @PostMapping("/will/sign")
+       public String willsign(Long willNo , Long userNo)  {
+          return willService.encryptWill(willNo, userNo);
+       }
        
    }

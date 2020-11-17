@@ -200,9 +200,13 @@ public class MemberService implements UserDetailsService {
         MemberEntity memberEntity = memberRepository.findById(id);
 
         MemberDto memberDto = MemberDto.builder()
+        		.password(memberEntity.getPassword())
+        		.gender(memberEntity.getGender())
         		.no(memberEntity.getNo())
                 .id(memberEntity.getId())
                 .email(memberEntity.getEmail())
+                .addr(memberEntity.getAddr())
+                .hasadderss(memberEntity.getHasaddress())
                 .name(memberEntity.getName())
                 .hp(memberEntity.getHp())
                 .usertype(memberEntity.getUsertype())
@@ -234,7 +238,7 @@ public class MemberService implements UserDetailsService {
     	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     	String password = passwordEncoder.encode(newpw);
         Long no = memberRepository.findMemberEntityById(id).getNo();
-        memberRepository.update(no, password);
+        memberRepository.Changepass(no, password);
     }
     
     //회원가입 email 중복확인

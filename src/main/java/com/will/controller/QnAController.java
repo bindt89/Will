@@ -1,6 +1,8 @@
 package com.will.controller;
 
 import com.will.dto.QnAFileDto;
+import com.will.dto.ReplyDto;
+import com.will.domain.entity.MemberEntity;
 import com.will.dto.QnADto;
 import com.will.service.QnAService;
 import com.will.util.QnAMD5Generator;
@@ -29,6 +31,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.transaction.Transactional;
    
 
    @Controller
@@ -43,7 +49,9 @@ import java.util.List;
        @GetMapping("/user/QnA/list")
        public String dispQnAlist(Model model) {
            List<QnADto> QnADtoList = QnAService.getQnAList();
+           List<ReplyDto> replyDtoList = QnAService.getReplyList();
             model.addAttribute("QnAList", QnADtoList);
+            model.addAttribute("ReplyList", replyDtoList);
            return "QnA/list";
        }
        //QnA 작성 페이지
@@ -90,7 +98,7 @@ import java.util.List;
                  }
            return "redirect:/user/QnA/list";
        }
-       
+       //QnA 디테일
        @GetMapping("/write/{no}")
        public String QnAdetail(@PathVariable("no") Long no ,Model model) {
     	   QnADto qnADto = QnAService.getPost(no);
@@ -107,7 +115,7 @@ import java.util.List;
            model.addAttribute("file",qnAFileDto);
            return "QnA/detail";
        }
-       
+       //QnA수정 페이지
        @GetMapping("/write/edit/{no}")
        public String QnAedit(@PathVariable("no") Long no, Model model) {
     	   QnADto QnADto = QnAService.getPost(no);
@@ -136,5 +144,31 @@ import java.util.List;
                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + URLEncoder.encode(QnAfileDto.getOrigFilename(),"utf-8") + "\"")
                    .body(resource);
        }
-       
+     //댓글 작성 페이지
+       @GetMapping("/QnA/reply/{no}")
+       public String dispReply(@PathVariable("no") Long no) {
+           return "QnA/reply";
+       }
+     //Reply db입력
+       @PostMapping("/QnA/reply")
+       public String Reply(ReplyDto replyDto, QnADto qnaDto) {
+    	   Long qnaNo = qnaDto.getNo();
+    	   replyDto.setQnano(qnaNo);
+    	   QnAService.saveReply(replyDto);
+		return "redirect:/user/QnA/list";   
+       }
+       //Reply 디테일
+       @GetMapping("/reply/{no}")
+       public String Replydetail(@PathVariable("no") Long no ,Model model) {
+    	   ReplyDto replyDto = QnAService.getReply(no);
+           model.addAttribute("reply", replyDto);
+           return "QnA/replydetail";
+       }       
+       //Reply수정 페이지
+       @GetMapping("/reply/edit/{no}")
+       public String Replyedit(@PathVariable("no") Long no, Model model) {
+    	   ReplyDto replyDto = QnAService.getReply(no);
+           model.addAttribute("reply", replyDto);
+           return "QnA/replyedit.html";
+       }       
    }

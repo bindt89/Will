@@ -11,15 +11,18 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-             <h5 class="card-title" th:text="@{${post.title} + ' - ' + ${post.memberId}}"></h5>
-             <h4 style="color: black;"><strong>작성일</strong></h4>
-            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}"></small></p>
+             <h4 style="color: black;"><strong>제목</strong></h4>
+            <h5 class="card-title" th:text="${post.title}"></h5>
             <h4 style="color: black;"><strong>내용</strong></h4>
-            <p class="card-text" th:text="${post.content}" style="box-sizing: border-box;"></p>
+            <p class="card-text" th:text="${post.content}"></p>
             <div>
                 <strong>첨부파일 : </strong>
-                <a class="card-text" th:href="@{'/download/' + ${post.fileId}}" th:text="${file.origFilename}"></a>
+                <a class="card-text" th:href="@{'/QnAdownload/' + ${post.fileId}}" th:text="${file.origFilename}"></a><br><br>
             </div>
+            <h4 style="color: black; float: left;"><strong>아이디:</strong></h4>
+            <h5 class="card-title" th:text="${post.memberId}" style="float: left;"></h5>
+            <h4 style="color: black; float: left;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;작성일:</strong></h4>
+            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(post.createdDate, 'yyyy-MM-dd HH:mm')}" ></small></p>
         </div>
     </div>
     <div class="row mt-3">
@@ -29,8 +32,8 @@
         </div>
         <div class="col-auto">
             <form id="delete-form" th:action="@{'/createwill/' + ${post.no}}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
-                <button id="delete-btn" type="submit" class="btn btn-danger">삭제</button>
+                <input type="hidden" name="_method" value="delete">
+                <input id="delete-btn" type="submit" class="btn btn-danger" value="삭제"><br><br>
             </form>
         </div>
     </div>

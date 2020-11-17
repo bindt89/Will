@@ -49,7 +49,7 @@ import com.will.dto.MailDto;
 	    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	    	String password = passwordEncoder.encode(str);
 	        Long no = memberRepository.findMemberEntityByEmail(email).getNo();
-	        memberRepository.update(no, password);
+	        memberRepository.Changepass(no, password);
 	    } 
 	    
 	    public String getTempPassword(){

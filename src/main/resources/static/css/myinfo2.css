@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+#animationbutton{
+  background:#80cbc4;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:60px;
+  padding:0.8em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  margin-left:400px;
+  font-weight:bolder;
+
+
+}
+#animationbutton:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+#animationbutton:before,.animationbutton:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+#animationbutton:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#animationbutton:hover:before,.animationbutton:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+.mi{
+	margin-left:200px;
+}

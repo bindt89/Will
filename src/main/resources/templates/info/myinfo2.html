@@ -2,94 +2,86 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
-<title>개인정보 변경</title>
+ <link href="../static/css/myinfo2.css" rel="stylesheet" th:href="@{/css/myinfo2.css}" /> 
+
+<title>Will : 정보수정</title>
 </head>
 <body class="index is-preload">
-<div th:insert="com/header.html">
-</div>
-<br>
-<br>
-<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
-<form th:action="@{'/resignup/update/' + ${currentUser.no}}" method="post" class="login100-form validate-form">
-   <!-- <input type="hidden" name="_method" value="put"/> -->
+<div th:insert="com/header.html" ></div> <br><br>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+ <link href="../static/css/myinfo2.css" rel="stylesheet" th:href="@{/css/myinfo2.css}" /> 
+<title>Will : 정보수정</title>
+</head>
+<body class="index is-preload">
+<div th:insert="com/header.html" ></div> <br><br>
+<form  th:action="@{'/resignup/update/' + ${currentUser.no}}" method="post" class="login100-form validate-form">
    <input type="hidden" name="no" th:value="${currentUser.no}"/>
    <input type="hidden" id="password" name="password" th:value="${currentUser.password}" readonly/>
    <input type="hidden" id="birthdate" name="birthdate" th:value="${currentUser.birthdate}" readonly/>
+   <input type="hidden" id="hasaddress" name="hasaddress" th:value="${currentUser.hasaddress}" readonly/>
+   <input type="hidden" id="usertype" name="usertype" th:value="${currentUser.usertype}" readonly/>
    <input type="hidden" id="gender" name="gender" th:value="${currentUser.gender}" readonly/>
    <input type="hidden" id="id" name="id" th:value="${currentUser.id}" readonly/>
-   <span class="login100-form-title p-b-25">
-   Change Member Information </span><br>
-   <br>
-   <br>
-   <tr>
-      <td id="mai">
-         이름
-      </td>
-      <br>
-      <td colspan="2" align="left">
-         &emsp;<input type="text" name="name" maxlength="20" th:value="${currentUser.name}" readonly>
-      </td>
-   </tr>
-   <br>
-   <!-- <tr>
-               <td id="mai">비밀번호</td><br>
-               <td colspan="1" align="left">&emsp;<input type="password"
-                  name="password" maxlength="50" placeholder="비밀번호를  입력하세요">
-               </td>
-            </tr><br>
-            <tr>
-               <td id="mai" >비밀번호 확인</td><br>
-               <td colspan="1" align="left">&emsp;<input type="password" name="passwordcheck" maxlength="50" placeholder="동일하게 입력하세요">
-               </td>
-            </tr><br> -->
-   <tr>
-      <td id="mai">
-         이메일
-      </td>
-      <br>
-      <td colspan="1" align="left">
-         &emsp; <input class="input100" type="text" name="email" maxlength="50" th:value="${currentUser.email}" readonly>
-         <span class="focus-input100"></span>
-      </td>
-   </tr>
-   <br>
-   <tr>
-      <td id="mai">
-         핸드폰
-      </td>
-      <br>
-      <td colspan="2" align="left">
-         &emsp; <input class="input100" type="text" name="hp" maxlength="15" th:value="${currentUser.hp}">
-         <span class="focus-input100"></span>
-      </td>
-   </tr>
-   <br>
-   <tr>
-       &emsp;
-      <td id="mai">
-         주소
-      </td>
-      <br>
-      <td>
-         <input type="text" size="70" name="addr" maxlength="15" th:value="${currentUser.addr}">
-      </td>
-      <span class="focus-input100"></span>
-   </tr>
-   <br>
-   <br>
-   <br>
-   <div class="container-login50-form-btn">
-      <button type="submit" class="login100-form-btn">
-      수정 </button><br>
-      <br>
-      <div class="text-center">
-         <a th:href="@{/user/info}" class="txt2 hov1">
-         Cancel </a>
-      </div>
-   </form>
-</div>
-</div>
-<div id="dropDownSelect1">
-</div>
+    			<div class="mi">
+				<span class="login100-form-title p-b-25" >
+						회원 정보 수정
+				</span><br><br><br>
+				<tr>
+					<td id="mai">&emsp;이름</td><br>
+					<td colspan="2" align="center">&emsp;
+					<input type="text" name="name" maxlength="10" th:value="${currentUser.name}" readonly >
+					</td>
+				</tr><br>
+				<tr>
+					<td id="mai">&emsp;이메일</td><br>
+					<td colspan="1" align="left">&emsp;
+				    <input class="input100" type="text" name="email" maxlength="50" th:value="${currentUser.email}" readonly >
+					<span class="focus-input100" ></span>
+					</td>
+				</tr><br>
+
+				<tr sec:authorize="hasRole('ROLE_LAWYER')">
+					<td id="mai">&emsp;변호사 번호</td><br>
+					<td colspan="2" align="left">&emsp; 
+					<input  class="input100" type="text" name="hp" maxlength="15" th:value="${currentUser.proof}" readonly >
+					<span class="focus-input100"></span>
+					</td>
+
+				</tr><br>
+		
+				<tr>
+					<td id="mai">&emsp;핸드폰</td><br>
+					<td colspan="2" align="left">&emsp; 
+					<input  class="input100" type="text" name="hp" maxlength="15" th:value="${currentUser.hp}" >
+					<span class="focus-input100"></span>
+					</td>
+
+				</tr><br>
+
+				
+					<tr>
+					<td id="mai">&emsp;주소</td><br>
+					<td><input type="text" size="70" name="addr"
+						maxlength="15" th:value="${currentUser.addr}"></td>
+					<span class="focus-input100"></span>
+				</tr><br><br><br>
+
+				
+				
+				<div>
+					<button  id="animationbutton" >수정</button>
+				    <input type="button" onclick="history.back()" value="돌아가기"
+				     style=" background-color:#757575; font-color:white; margin-left:-1.5px" id="animationbutton">
+				     <br>
+				     <br>
+				     <br>
+				</div>
+			</form>			
+	<div id="dropDownSelect1"></div>
+</body>
+</html>
 </body>
 </html>

@@ -19,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import com.will.domain.entity.TimeEntity;
 
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.transaction.Transactional;
 import com.will.domain.entity.WillEntity;
 import java.util.ArrayList;
@@ -52,29 +54,22 @@ public class WillService {
     
     
     
+    
     @Transactional
-    public static List<WillDto> getWillList(Integer pageNum) {
-    	
-    	Page<WillEntity> page = WillRepository
-    			.findAll(PageRequest
-    					.of(pageNum-1,PAGE_POST_COUNT,Sort.by(Sort.Direction.ASC,"createdDate")));
-    	
-    	page.getContent();
+    public List<WillDto> getWillList() {
         List<WillEntity> WillList = WillRepository.findAll();
         List<WillDto> WillDtoList = new ArrayList<>();
 
         for(WillEntity willEntity : WillList) {
-        	
             WillDto WillDto = com.will.dto.WillDto.builder()
-            		.no(willEntity.getNo())
-            		.memberId(willEntity.getMemberId())
+                  .no(willEntity.getNo())
+                    .memberId(willEntity.getMemberId())
                     .title(willEntity.getTitle())
                     .content(willEntity.getContent())
+                    .createdDate(willEntity.getCreatedDate())
                     .lawyerId(willEntity.getLawyerId())
                     .jinhang(willEntity.getJinhang())
-                    .createdDate(willEntity.getCreatedDate())
                     
-                   
                     .build();
             WillDtoList.add(WillDto);
         }
@@ -155,5 +150,10 @@ public class WillService {
     public Long getwillCount() {
     	return WillRepository.count();
     	
+    }
+ // 사인 업그레드
+    @Transactional
+    public void uploadSignedWill(String signedMsg) {
+       
     }
 }

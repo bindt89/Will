@@ -9,17 +9,12 @@
 </head>
 <body>
 <div th:insert="com/header2.html" ></div>
-
- 
    <div class="container-login50" align="center">
       <div class="wrap-login50 p-l-55 p-r-55 p-t-50 p-b-30">
-         <form th:action="@{searchPass}" method="get" class="login50-form validate-form">
-         
-         
+         <form th:action="@{/searchPass}" method="get" class="login50-form validate-form">
             <div style="color: #ac2925"><br><br><br>
                       <div style="text-align: center;">password 찾기</div>
                     </div><br>
-
             <div class="wrap-input50 validate-input m-b-10">
                <input id="email" class="input50" type="text" name="email" placeholder="email을 입력하세요">
                <span class="focus-input50"></span><br>
@@ -28,7 +23,6 @@
                <input id="name" class="input50" type="text" name="name" placeholder="이름을 입력하세요">
                <span class="focus-input50"></span>
             </div>
-            
             <br>
             <div class="container-login50-form-btn">
                <button type="button" class="login50-form-btn" id="checkEmail">
@@ -36,7 +30,6 @@
                </button>
             </div>
             <div class="text-center small mt-2" id="checkMsg" style="color: red"></div><br><br>
-
             <div class="text-center">
                <a sec:authorize="isAnonymous()" th:href="@{user/login}" class="txt2 hov1">
                   Cancel
@@ -45,9 +38,7 @@
          </form>         
       </div>
    </div>
-   
    <script>
-
     $('.modal').on('hidden.bs.modal', function (e) {
         console.log('modal close');
         $(this).find('form')[0].reset()
